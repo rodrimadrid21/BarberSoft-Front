@@ -1,0 +1,278 @@
+/* =========================
+   ESTRUCTURA
+========================= */
+
+.login-page {
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+
+  background-color: var(--color-background);
+}
+
+
+/* =========================
+   PRESENTACIÓN
+========================= */
+
+.login-presentation {
+  display: flex;
+  align-items: flex-end;
+
+  padding: 70px;
+
+  background:
+    linear-gradient(
+      rgba(10, 10, 12, 0.15),
+      rgba(10, 10, 12, 0.95)
+    ),
+    url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=85")
+    center / cover no-repeat;
+}
+
+.presentation-content {
+  max-width: 720px;
+}
+
+.presentation-label {
+  display: inline-block;
+
+  margin-bottom: 20px;
+  padding: 8px 14px;
+
+  border: 1px solid rgba(212, 168, 83, 0.45);
+  border-radius: 999px;
+
+  color: var(--color-primary);
+  background: rgba(17, 17, 19, 0.7);
+
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.presentation-content h1 {
+  margin: 0;
+
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.7rem, 5vw, 5.2rem);
+
+  line-height: 1.05;
+}
+
+.presentation-content h1 span {
+  color: var(--color-primary);
+}
+
+.presentation-content > p {
+  max-width: 570px;
+
+  margin-top: 22px;
+
+  color: #d2d2d7;
+
+  font-size: 1rem;
+}
+
+.presentation-features {
+  margin-top: 30px;
+}
+
+.presentation-features span {
+  padding: 9px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+
+  color: #ececee;
+  background: rgba(20, 20, 23, 0.75);
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 48px;
+
+  background:
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(212, 168, 83, 0.09),
+      transparent 30%
+    ),
+    var(--color-background);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 430px;
+
+  padding: 42px;
+
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+
+  background: var(--color-surface);
+
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+}
+
+.login-subtitle {
+  margin-bottom: 8px;
+
+  color: var(--color-primary);
+
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.login-card h2 {
+  color: var(--color-text);
+
+  font-family: "Playfair Display", serif;
+}
+
+.login-description {
+  color: var(--color-text-muted);
+}
+
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.login-card .form-label {
+  color: var(--color-text);
+
+  font-weight: 600;
+}
+
+.login-card .form-control {
+  padding: 14px;
+
+  border-color: var(--color-border);
+
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+}
+
+.login-card .form-control::placeholder {
+  color: #777780;
+}
+
+.login-card .form-control:focus {
+  border-color: var(--color-primary);
+
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.12);
+}
+
+.login-card .form-check-label {
+  color: var(--color-text-muted);
+}
+
+.login-card .form-check-input {
+  border-color: #55555d;
+
+  background-color: var(--color-surface-light);
+}
+
+.login-card .form-check-input:checked {
+  border-color: var(--color-primary);
+
+  background-color: var(--color-primary);
+}
+
+
+/* =========================
+   BOTONES
+========================= */
+
+.forgot-password {
+  padding: 0;
+
+  border: 0;
+
+  color: var(--color-primary);
+  background: transparent;
+
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.login-button {
+  min-height: 50px;
+
+  border: 0;
+
+  color: #151515;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #efcf8c
+    );
+
+  font-weight: 700;
+}
+
+.login-button:hover {
+  color: #151515;
+
+  filter: brightness(1.05);
+}
+
+.login-footer {
+  margin-top: 28px;
+  margin-bottom: 0;
+
+  color: #777780;
+
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 950px) {
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+
+  .login-presentation {
+    min-height: 380px;
+
+    padding: 50px 32px;
+  }
+
+  .login-section {
+    padding: 40px 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .login-presentation {
+    padding: 40px 22px;
+  }
+
+  .presentation-features {
+    display: none !important;
+  }
+
+  .login-card {
+    padding: 30px 22px;
+  }
+}

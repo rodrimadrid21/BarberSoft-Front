@@ -1,0 +1,493 @@
+/* =========================
+   PÁGINA
+========================= */
+
+.services-page {
+  min-height: 100vh;
+  padding: 42px;
+
+  color: var(--color-text);
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(212, 168, 83, 0.08),
+      transparent 28%
+    ),
+    var(--color-background);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.services-header {
+  max-width: 1400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+
+  margin: 0 auto 34px;
+}
+
+.services-label,
+.services-panel-label {
+  color: var(--color-primary);
+
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.services-label {
+  margin-bottom: 8px;
+
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+}
+
+.services-panel-label {
+  margin-bottom: 6px;
+
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.services-header h1 {
+  margin-bottom: 8px;
+
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.services-description {
+  color: var(--color-text-muted);
+}
+
+.new-service-button,
+.modal-save-button {
+  border: 0;
+
+  color: #151515;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #efcf8c
+    );
+
+  font-weight: 700;
+}
+
+.new-service-button {
+  padding: 14px 20px;
+}
+
+.new-service-button:hover {
+  color: #151515;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 12px 24px rgba(212, 168, 83, 0.18);
+}
+
+
+/* =========================
+   RESUMEN
+========================= */
+
+.services-summary {
+  max-width: 1400px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+
+  margin: 0 auto 24px;
+}
+
+.services-summary-card {
+  padding: 22px;
+
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+
+  background-color: var(--color-surface);
+}
+
+.services-summary-card p {
+  margin-bottom: 12px;
+
+  color: var(--color-text-muted);
+
+  font-size: 0.88rem;
+}
+
+.services-summary-card h2 {
+  margin: 0;
+
+  font-size: 1.8rem;
+}
+
+
+/* =========================
+   PANEL
+========================= */
+
+.services-panel {
+  max-width: 1400px;
+
+  margin: 0 auto;
+  padding: 28px;
+
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+
+  background-color: var(--color-surface);
+}
+
+.services-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  margin-bottom: 26px;
+}
+
+.services-panel-header h2 {
+  margin: 0;
+
+  font-size: 1.3rem;
+}
+
+
+/* =========================
+   BUSCADOR
+========================= */
+
+.services-search {
+  width: 260px;
+
+  border-color: var(--color-border);
+
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+}
+
+.services-search::placeholder {
+  color: #72727b;
+}
+
+.services-search:focus {
+  border-color: var(--color-primary);
+
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.1);
+}
+
+
+/* =========================
+   TARJETA
+========================= */
+
+.service-card {
+  grid-template-columns:
+    minmax(240px, 1.5fr)
+    minmax(120px, 0.6fr)
+    minmax(120px, 0.6fr)
+    auto;
+
+  border: 1px solid #2d2d33;
+  border-radius: 15px;
+
+  background-color: #1c1c20;
+
+  transition: var(--transition);
+}
+
+.service-card:hover {
+  transform: translateY(-2px);
+
+  border-color: #44444b;
+
+  background-color: #202025;
+}
+
+.service-icon {
+  width: 46px;
+  height: 46px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  color: #151515;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #efd08f
+    );
+
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+
+/* =========================
+   ESTADO Y DETALLES
+========================= */
+
+.service-status {
+  display: inline-block;
+
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.service-status.active {
+  color: #8bd5aa;
+
+  background-color: rgba(64, 180, 110, 0.12);
+}
+
+.service-status.inactive {
+  color: #d88888;
+
+  background-color: rgba(200, 75, 75, 0.12);
+}
+
+.service-detail span {
+  color: #7f7f88;
+
+  font-size: 0.75rem;
+}
+
+.service-detail strong {
+  color: var(--color-text);
+
+  font-size: 0.95rem;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background-color: rgba(0, 0, 0, 0.72);
+
+  backdrop-filter: blur(6px);
+}
+
+.service-modal {
+  width: 100%;
+  max-width: 520px;
+
+  padding: 28px;
+
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+
+  background-color: var(--color-surface);
+
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.modal-label {
+  margin-bottom: 6px;
+
+  color: var(--color-primary);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.modal-label.danger {
+  color: #e88787;
+}
+
+.service-modal h2 {
+  margin: 0;
+
+  color: var(--color-text);
+
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+}
+
+.modal-close {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+
+  color: var(--color-text-muted);
+  background-color: var(--color-surface-light);
+
+  font-size: 1.3rem;
+}
+
+.modal-close:hover {
+  color: var(--color-text);
+
+  background-color: #2b2b31;
+}
+
+
+/* =========================
+   FORMULARIO BOOTSTRAP
+========================= */
+
+.service-modal .form-label {
+  color: var(--color-text);
+
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.service-modal .form-control {
+  border-color: var(--color-border);
+
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+}
+
+.service-modal .form-control::placeholder,
+.service-modal .form-text {
+  color: #777780;
+}
+
+.service-modal .form-control:focus {
+  border-color: var(--color-primary);
+
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.1);
+}
+
+.service-modal .form-check-label {
+  color: var(--color-text-muted);
+}
+
+.service-modal .form-check-input {
+  border-color: #55555d;
+
+  background-color: var(--color-surface-light);
+}
+
+.service-modal .form-check-input:checked {
+  border-color: var(--color-primary);
+
+  background-color: var(--color-primary);
+}
+
+.service-modal .form-check-input:focus {
+  border-color: var(--color-primary);
+
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.1);
+}
+
+
+/* =========================
+   ACCIONES
+========================= */
+
+.modal-save-button:hover {
+  color: #151515;
+
+  filter: brightness(1.05);
+}
+
+.delete-modal-content {
+  color: var(--color-text-muted);
+
+  line-height: 1.6;
+}
+
+.delete-modal-content strong {
+  color: var(--color-text);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 950px) {
+  .service-card {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-actions {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 700px) {
+  .services-page {
+    padding: 26px 16px 100px;
+  }
+
+  .services-header,
+  .services-panel-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .new-service-button,
+  .services-search {
+    width: 100%;
+  }
+
+  .services-summary,
+  .service-card {
+    grid-template-columns: 1fr;
+  }
+
+  .services-panel {
+    padding: 20px;
+  }
+
+  .service-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .service-modal {
+    padding: 22px;
+  }
+}
