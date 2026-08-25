@@ -1,8 +1,12 @@
-const SummaryCard = ({ titulo, valor, detalle }) => {
+const SummaryCard = ({
+  titulo,
+  valor,
+  detalle,
+}) => {
   return (
     <article className="summary-card">
-      <p>{titulo}</p>
       <h2>{valor}</h2>
+      <p>{titulo}</p>
       <span>{detalle}</span>
     </article>
   );

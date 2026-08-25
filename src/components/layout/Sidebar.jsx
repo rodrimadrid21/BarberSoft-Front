@@ -11,7 +11,9 @@ const Sidebar = () => {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
-        <div className="sidebar-logo">B</div>
+        <div className="sidebar-logo">
+          BS
+        </div>
 
         <div>
           <h2>BarberSoft</h2>
@@ -20,15 +22,14 @@ const Sidebar = () => {
       </div>
 
       <nav className="sidebar-navigation">
-        <p className="sidebar-section-title">Principal</p>
-
         <NavLink
           to="/dashboard"
           className={({ isActive }) =>
             isActive ? "sidebar-link active" : "sidebar-link"
           }
         >
-          Dashboard
+          <i className="bi bi-house-door"></i>
+          <span>Dashboard</span>
         </NavLink>
 
         <NavLink
@@ -37,7 +38,8 @@ const Sidebar = () => {
             isActive ? "sidebar-link active" : "sidebar-link"
           }
         >
-          Agenda
+          <i className="bi bi-calendar3"></i>
+          <span>Agenda</span>
         </NavLink>
 
         <NavLink
@@ -46,7 +48,8 @@ const Sidebar = () => {
             isActive ? "sidebar-link active" : "sidebar-link"
           }
         >
-          Clientes
+          <i className="bi bi-person"></i>
+          <span>Clientes</span>
         </NavLink>
 
         <NavLink
@@ -55,7 +58,8 @@ const Sidebar = () => {
             isActive ? "sidebar-link active" : "sidebar-link"
           }
         >
-          Servicios
+          <i className="bi bi-scissors"></i>
+          <span>Servicios</span>
         </NavLink>
 
         <NavLink
@@ -64,7 +68,8 @@ const Sidebar = () => {
             isActive ? "sidebar-link active" : "sidebar-link"
           }
         >
-          Cobros
+          <i className="bi bi-credit-card"></i>
+          <span>Cobros</span>
         </NavLink>
 
         <NavLink
@@ -73,7 +78,8 @@ const Sidebar = () => {
             isActive ? "sidebar-link active" : "sidebar-link"
           }
         >
-          Reportes
+          <i className="bi bi-bar-chart"></i>
+          <span>Reportes</span>
         </NavLink>
       </nav>
 
@@ -84,7 +90,8 @@ const Sidebar = () => {
             isActive ? "sidebar-link active" : "sidebar-link"
           }
         >
-          Configuración
+          <i className="bi bi-gear"></i>
+          <span>Configuración</span>
         </NavLink>
 
         <button
@@ -92,7 +99,8 @@ const Sidebar = () => {
           type="button"
           onClick={handleLogout}
         >
-          Cerrar sesión
+          <i className="bi bi-box-arrow-right"></i>
+          <span>Cerrar sesión</span>
         </button>
       </div>
     </aside>

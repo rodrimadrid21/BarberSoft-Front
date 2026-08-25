@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
+import loginImage from "../../assets/ImgBarberSoft0.png";
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -12,18 +14,24 @@ const Login = () => {
   return (
     <main className="login-page">
       <section className="login-presentation">
+        <img
+          className="login-presentation-image"
+          src={loginImage}
+          alt=""
+        />
+
+        <div className="login-presentation-overlay"></div>
+
         <div className="presentation-content">
-          <span className="presentation-label">
-            Gestión de barbería
-          </span>
 
           <h1>
-            Administrá tu barbería de una manera
-            <span> simple y profesional.</span>
+            Cada corte.<br />
+            Cada cliente.<br />
+            <span> Bajo control.</span>
           </h1>
 
           <p>
-            Organizá turnos, clientes, servicios y ganancias desde un único lugar.
+            Gestioná tu equipo, conocé a tus clientes y administrá tus servicios desde un solo lugar.
           </p>
 
           <div className="presentation-features d-flex flex-wrap gap-2">
@@ -36,9 +44,25 @@ const Login = () => {
 
       <section className="login-section">
         <div className="login-card">
-          <div className="mb-4">
-            <p className="login-subtitle">BarberSoft</p>
+          <div className="login-brand">
+            <div className="login-brand-logo">
+              B
+            </div>
+
+            <div>
+              <p className="login-brand-name">
+                BarberSoft
+              </p>
+
+              <span className="login-brand-description">
+                Gestión de barbería
+              </span>
+            </div>
+          </div>
+
+          <div className="login-header">
             <h2>Bienvenido</h2>
+
             <p className="login-description">
               Ingresá tus datos para acceder al sistema.
             </p>
@@ -49,7 +73,10 @@ const Login = () => {
             onSubmit={handleSubmit}
           >
             <div>
-              <label className="form-label" htmlFor="email">
+              <label
+                className="form-label"
+                htmlFor="email"
+              >
                 Correo electrónico
               </label>
 
@@ -65,8 +92,11 @@ const Login = () => {
             </div>
 
             <div>
-              <div className="d-flex justify-content-between mb-2">
-                <label className="form-label mb-0" htmlFor="password">
+              <div className="d-flex justify-content-between align-items-center mb-2">
+                <label
+                  className="form-label mb-0"
+                  htmlFor="password"
+                >
                   Contraseña
                 </label>
 
