@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
@@ -6,8 +7,33 @@ import loginImage from "../../assets/ImgBarberSoft0.png";
 const Login = () => {
   const navigate = useNavigate();
 
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
+  const [error, setError] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const email = emailRef.current.value.trim();
+    const password = passwordRef.current.value.trim();
+
+    if (email === "" || password === "") {
+      setError("Todos los campos son obligatorios.");
+      return;
+    }
+
+    if (!emailRef.current.checkValidity()) {
+      setError("Ingresá un correo electrónico válido.");
+      return;
+    }
+
+    if (password.length < 4) {
+      setError("La contraseña debe tener al menos 4 caracteres.");
+      return;
+    }
+
+    setError("");
     navigate("/dashboard");
   };
 
@@ -23,15 +49,17 @@ const Login = () => {
         <div className="login-presentation-overlay"></div>
 
         <div className="presentation-content">
-
           <h1>
-            Cada corte.<br />
-            Cada cliente.<br />
-            <span> Bajo control.</span>
+            Cada corte.
+            <br />
+            Cada cliente.
+            <br />
+            <span>Bajo control.</span>
           </h1>
 
           <p>
-            Gestioná tu equipo, conocé a tus clientes y administrá tus servicios desde un solo lugar.
+            Gestioná tu equipo, conocé a tus clientes y administrá tus servicios
+            desde un solo lugar.
           </p>
 
           <div className="presentation-features d-flex flex-wrap gap-2">
@@ -71,6 +99,7 @@ const Login = () => {
           <form
             className="d-flex flex-column gap-3"
             onSubmit={handleSubmit}
+            noValidate
           >
             <div>
               <label
@@ -81,13 +110,13 @@ const Login = () => {
               </label>
 
               <input
+                ref={emailRef}
                 className="form-control"
                 id="email"
                 name="email"
                 type="email"
                 placeholder="barbero@email.com"
                 autoComplete="email"
-                required
               />
             </div>
 
@@ -109,15 +138,22 @@ const Login = () => {
               </div>
 
               <input
+                ref={passwordRef}
                 className="form-control"
                 id="password"
                 name="password"
                 type="password"
                 placeholder="Ingresá tu contraseña"
                 autoComplete="current-password"
-                required
               />
             </div>
+
+            {error && (
+  <div className="login-error">
+    <span className="login-error-icon">!</span>
+    <span>{error}</span>
+  </div>
+)}
 
             <div className="form-check">
               <input
