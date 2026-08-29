@@ -82,9 +82,7 @@
 
 .dashboard-date,
 .panel-label {
-  margin-bottom: 8px;
-
-  color: var(--color-primary);
+  margin-bottom: 4px;
 
   font-size: 0.7rem;
   font-weight: 700;
@@ -375,7 +373,7 @@
   margin-bottom: 2px;
 
   font-size: 1rem;
-
+  color: #dbdbdd;
   margin-bottom: 8px;
 }
 
@@ -424,15 +422,9 @@
 
 .billing-panel h2 {
   margin-bottom: 0;
-
+  color: var(--color-primary);
   font-size: 1.2rem;
   font-weight: 500;
-}
-
-.billing-description {
-  color: var(--color-text-muted);
-
-  font-size: 0.68rem;
 }
 
 .billing-growth {
@@ -453,20 +445,54 @@
   font-size: 0.58rem;
 }
 
+/* =========================
+   GRÁFICO DE FACTURACIÓN
+========================= */
+
 .billing-chart {
-  min-height: 65px;
+  height: 90px;
+  min-height: 0;
+  flex: 1;
+
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 10px;
+}
+
+.billing-scale {
+  height: 65px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  flex-shrink: 0;
+}
+
+.billing-scale span {
+  color: var(--color-text-muted);
+
+  font-size: 0.58rem;
+}
+
+.billing-bars {
+  min-width: 0;
+  height: 80px;
+
   flex: 1;
 
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
 
-  gap: 10px;
-
+  gap: 1px;
 }
 
 .billing-column {
   height: 100%;
+
   flex: 1;
 
   display: flex;
@@ -474,12 +500,12 @@
   justify-content: flex-end;
   align-items: center;
 
-  gap: 4px;
+  gap: 5px;
 }
 
 .billing-bar-container {
   width: 100%;
-  height: 80%;
+  height: 72px;
 
   display: flex;
   align-items: flex-end;
@@ -487,14 +513,10 @@
 }
 
 .billing-bar {
-  width: clamp(12px, 1.2vw, 17px);
+  width: clamp(12px, 2vw, 24px);
 
   border-radius: 3px 3px 0 0;
 
-  background-color: #454545;
-}
-
-.billing-bar.active {
   background:
     linear-gradient(
       180deg,
@@ -508,7 +530,6 @@
 
   font-size: 0.58rem;
 }
-
 
 /* =========================
    PANTALLAS CON POCA ALTURA

@@ -27,8 +27,8 @@ const ServiceList = ({ servicios, onEditar, onEliminar }) => {
           </div>
 
           <div className="d-flex flex-column gap-1 service-detail">
-            <span>Duración</span>
-            <strong>{servicio.duration} min</strong>
+            <span>Tiempo</span>
+            <strong>{servicio.durationInMinutes} min</strong>
           </div>
 
           <div className="d-flex flex-column gap-1 service-detail">
@@ -40,7 +40,7 @@ const ServiceList = ({ servicios, onEditar, onEliminar }) => {
 
           <div className="d-flex gap-2 service-actions">
             <button
-              className="btn btn-outline-light btn-sm"
+              className="edit-service-button"
               type="button"
               onClick={() => onEditar(servicio)}
             >
@@ -48,7 +48,7 @@ const ServiceList = ({ servicios, onEditar, onEliminar }) => {
             </button>
 
             <button
-              className="btn btn-outline-danger btn-sm"
+              className="delete-service-button"
               type="button"
               onClick={() => onEliminar(servicio)}
             >

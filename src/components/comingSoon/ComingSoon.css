@@ -1,0 +1,47 @@
+.coming-soon-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+.coming-soon-content {
+  max-width: 550px;
+  text-align: center;
+}
+
+.coming-soon-content p {
+  margin-bottom: 10px;
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.coming-soon-content h1 {
+  margin-bottom: 14px;
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+}
+
+.coming-soon-content span {
+  display: block;
+  margin-bottom: 28px;
+  color: var(--color-text-muted);
+}
+
+.coming-soon-button {
+  padding: 12px 20px;
+  border: 0;
+  color: #151515;
+  background-color: var(--color-primary);
+  font-weight: 700;
+}
+
+.coming-soon-button:hover {
+  color: #151515;
+  filter: brightness(1.05);
+}

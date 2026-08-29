@@ -55,7 +55,7 @@
 .clients-header h1 {
   margin-bottom: 8px;
 
-  font-family: "Playfair Display", serif;
+  font-family: "Playfair Display", initial;
   font-size: clamp(2rem, 4vw, 3.2rem);
 }
 
@@ -243,7 +243,39 @@
 
   font-size: 0.86rem;
 }
+.edit-client-button,
+.client-save-button {
+  border: 0;
+  font-size: 0.85rem;
+  
+  color: #151515;
 
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #d1bc8dc3
+    );
+
+  font-weight: 700;
+}
+
+.edit-client-button {
+  padding: 3px 14px;
+  border-radius: 4px;
+}
+
+.edit-client-button:hover,
+.client-save-button:hover {
+  color: #151515;
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #ce9a2cc3
+    );
+  filter: brightness(1.05);
+}
 
 /* =========================
    MODAL
@@ -296,7 +328,7 @@
 
   color: var(--color-text);
 
-  font-family: "Playfair Display", serif;
+  font-family: "Playfair Display", initial;
   font-size: 1.6rem;
 }
 
@@ -341,7 +373,78 @@
   box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.1);
 }
 
+.client-error {
+  margin: 6px 0 0;
+  color: #c97a7a;
+  font-size: 0.78rem;
+  font-weight: 400;
+}
 
+.client-modal .form-control.is-invalid {
+  border-color: #9b5d5d;
+  box-shadow: none;
+}
+
+/* =========================
+   MODAL ELIMINAR CLIENTE
+========================= */
+
+.delete-client-modal {
+  width: 100%;
+  max-width: 460px;
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background-color: var(--color-surface);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.delete-client-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.delete-client-label {
+  margin-bottom: 6px;
+  color: #c62626c8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.delete-client-modal h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: "Playfair Display", initial;
+  font-size: 1.5rem;
+}
+
+.delete-client-text {
+  margin-bottom: 8px;
+  color: var(--color-text);
+  font-size: 0.95rem;
+}
+
+.delete-client-button {
+  border: 1px solid #921919;
+  color: #921919;
+  background-color: rgba(117, 2, 2, 0.12);
+  font-weight: 600;
+}
+
+.delete-client-button {
+  border-radius: 4px;
+}
+
+.delete-client-button:hover {
+  border-color: #e03939;
+  color: #c51919;
+  background-color: rgba(191, 51, 51, 0.292);
+}
 /* =========================
    RESPONSIVE
 ========================= */

@@ -1,45 +1,67 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Client.css";
-
 import ClientList from "./ClientList";
 import ClientModal from "./ClientModal";
+import DeleteClientModal from "./DeleteClientModal";
+import ClientSearch from "./ClientSearch";
+import {getClientes,createCliente,updateCliente,deleteCliente,} from "../../api/ClientApi";
 
 const Client = () => {
-  const [clientes, setClientes] = useState([
-    {
-      id: 1,
-      name: "Juan Pérez",
-      phone: "11 5555-1234",
-    },
-    {
-      id: 2,
-      name: "Martín López",
-      phone: "11 4444-9876",
-    },
-    {
-      id: 3,
-      name: "Lucas Gómez",
-      phone: "11 3333-7654",
-    },
-  ]);
+  const [clientes, setClientes] = useState([]);
+
+  const [clientSearch, setClientSearch] = useState("");
 
   const [modalAbierto, setModalAbierto] = useState(false);
   const [modoModal, setModoModal] = useState("crear");
   const [clienteSeleccionado, setClienteSeleccionado] = useState(null);
+
+  const [clienteAEliminar, setClienteAEliminar] = useState(null);
 
   const [form, setForm] = useState({
     name: "",
     phone: "",
   });
 
-  // -------------------------
-  // ABRIR MODAL CREAR
-  // -------------------------
+  const [errores, setErrores] = useState({
+    name: "",
+    phone: "",
+  });
 
+  // CARGAR CLIENTES
+  useEffect(() => {
+    cargarClientes();
+  }, []);
+
+  const cargarClientes = async () => {
+    try {
+      const data = await getClientes();
+      setClientes(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // BUSCAR CLIENTES
+  const handleSearchClient = (search) => {
+    setClientSearch(search);
+  };
+
+  const clientesFiltrados = clientes.filter((cliente) =>
+    cliente.name
+      .toLowerCase()
+      .includes(clientSearch.toLowerCase())
+  );
+
+
+  // ABRIR MODAL CREAR
   const abrirModalCrear = () => {
     setModoModal("crear");
 
     setForm({
+      name: "",
+      phone: "",
+    });
+    setErrores({
       name: "",
       phone: "",
     });
@@ -48,10 +70,7 @@ const Client = () => {
     setModalAbierto(true);
   };
 
-  // -------------------------
   // ABRIR MODAL EDITAR
-  // -------------------------
-
   const abrirModalEditar = (cliente) => {
     setModoModal("editar");
 
@@ -61,99 +80,127 @@ const Client = () => {
       name: cliente.name,
       phone: cliente.phone,
     });
+    setErrores({
+      name: "",
+      phone: "",
+    });
 
     setModalAbierto(true);
   };
 
-  // -------------------------
   // CERRAR MODAL
-  // -------------------------
-
   const cerrarModal = () => {
     setModalAbierto(false);
     setClienteSeleccionado(null);
+
+    setErrores({
+      name: "",
+      phone: "",
+    });
   };
 
-  // -------------------------
   // CONTROLAR INPUTS
-  // -------------------------
-
   const handleChange = (event) => {
     const { name, value } = event.target;
 
+    if (name === "phone" && isNaN(value)) {
+      return;
+    }
     setForm({
       ...form,
       [name]: value,
     });
   };
 
-  // -------------------------
-  // CREAR / EDITAR
-  // -------------------------
+  // VALIDAR FORMULARIO
+  const validarFormulario = () => {
+    const nuevosErrores = {
+      name: "",
+      phone: "",
+    };
 
-  const handleSubmit = (event) => {
+    if (form.name === "") {
+      nuevosErrores.name = "Ingresá un nombre válido.";
+    }
+    if (form.phone === "") {
+      nuevosErrores.phone = "Ingresá un teléfono válido.";
+    }
+    setErrores(nuevosErrores);
+
+    return !nuevosErrores.name && !nuevosErrores.phone;
+  };
+
+  // CREAR / EDITAR
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (modoModal === "crear") {
-      const nuevoCliente = {
-        id: Date.now(),
-        name: form.name,
-        phone: form.phone,
-      };
+    const formularioValido = validarFormulario();
 
-      setClientes([...clientes, nuevoCliente]);
+    if (!formularioValido) {
+      return;
     }
+    try {
+      if (modoModal === "crear") {
+        const nuevoCliente = await createCliente(form);
 
-    if (modoModal === "editar") {
-      const clientesActualizados = clientes.map((cliente) =>
-        cliente.id === clienteSeleccionado.id
-          ? {
-              ...cliente,
-              name: form.name,
-              phone: form.phone,
-            }
-          : cliente
+        setClientes([...clientes, nuevoCliente]);
+      }
+
+      if (modoModal === "editar") {
+        const clienteActualizado = await updateCliente(
+          clienteSeleccionado.id,
+          form
+        );
+        const clientesActualizados = clientes.map((cliente) =>
+          cliente.id === clienteSeleccionado.id
+            ? clienteActualizado
+            : cliente
+        );
+
+        setClientes(clientesActualizados);
+      }
+
+      cerrarModal();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // ABRIR MODAL ELIMINAR
+  const abrirModalEliminar = (cliente) => {
+    setClienteAEliminar(cliente);
+  };
+
+  // CERRAR MODAL ELIMINAR
+  const cerrarModalEliminar = () => {
+    setClienteAEliminar(null);
+  };
+
+  // CONFIRMAR ELIMINACIÓN
+  const confirmarEliminarCliente = async () => {
+    try {
+      await deleteCliente(clienteAEliminar.id);
+
+      const clientesActualizados = clientes.filter(
+        (clienteActual) =>
+          clienteActual.id !== clienteAEliminar.id
       );
 
       setClientes(clientesActualizados);
+      cerrarModalEliminar();
+    } catch (error) {
+      console.error(error);
     }
-
-    cerrarModal();
-  };
-
-  // -------------------------
-  // ELIMINAR CLIENTE
-  // -------------------------
-
-  const eliminarCliente = (cliente) => {
-    const confirmar = window.confirm(
-      `¿Querés eliminar a ${cliente.name}?`
-    );
-
-    if (!confirmar) {
-      return;
-    }
-
-    const clientesActualizados = clientes.filter(
-      (clienteActual) => clienteActual.id !== cliente.id
-    );
-
-    setClientes(clientesActualizados);
   };
 
   return (
     <main className="clients-page">
       <header className="clients-header">
         <div>
-          <p className="clients-label">
-            Administración
-          </p>
+          <p className="clients-label">Administración</p>
 
           <h1>Clientes</h1>
-
-          <p className="clients-description">
-            Gestioná los clientes registrados en la barbería.
-          </p>
+          <p className="clients-description">Gestioná los clientes registrados en la barbería.</p>
         </div>
 
         <button
@@ -175,24 +222,20 @@ const Client = () => {
       <section className="clients-panel">
         <div className="clients-panel-header">
           <div>
-            <p className="clients-panel-label">
-              Directorio
-            </p>
-
-            <h2>Clientes</h2>
+            <p className="clients-panel-label">Registros</p>
+            <h2>Todos los clientes</h2>
           </div>
 
-          <input
-            className="form-control clients-search"
-            type="text"
-            placeholder="Buscar cliente..."
+          <ClientSearch
+            clientSearch={clientSearch}
+            onSearchClient={handleSearchClient}
           />
         </div>
 
         <ClientList
-          clientes={clientes}
+          clientes={clientesFiltrados}
           onEditar={abrirModalEditar}
-          onEliminar={eliminarCliente}
+          onEliminar={abrirModalEliminar}
         />
       </section>
 
@@ -200,9 +243,18 @@ const Client = () => {
         <ClientModal
           modoModal={modoModal}
           form={form}
+          errores={errores}
           onChange={handleChange}
           onSubmit={handleSubmit}
           onCerrar={cerrarModal}
+        />
+      )}
+
+      {clienteAEliminar && (
+        <DeleteClientModal
+          cliente={clienteAEliminar}
+          onConfirmar={confirmarEliminarCliente}
+          onCancelar={cerrarModalEliminar}
         />
       )}
     </main>

@@ -8,9 +8,7 @@ const DeleteModal = ({
       <div className="service-modal">
         <div className="d-flex justify-content-between align-items-start gap-3 mb-4">
           <div>
-            <p className="modal-label danger">
-              Eliminar servicio
-            </p>
+            <p className="delete-service-label">Eliminar servicio</p>
 
             <h2>¿Estás seguro?</h2>
           </div>
@@ -30,9 +28,6 @@ const DeleteModal = ({
             <strong>{servicio?.name}</strong>.
           </p>
 
-          <p>
-            Esta acción no se podrá deshacer.
-          </p>
         </div>
 
         <div className="d-flex justify-content-end gap-2 mt-4">
@@ -45,7 +40,7 @@ const DeleteModal = ({
           </button>
 
           <button
-            className="btn btn-outline-danger"
+            className="delete-service-button"
             type="button"
             onClick={onEliminar}
           >

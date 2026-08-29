@@ -1,6 +1,7 @@
 const ServiceModal = ({
   modoModal,
   form,
+  errores,
   onChange,
   onSubmit,
   onCerrar,
@@ -52,34 +53,40 @@ const ServiceModal = ({
               placeholder="Ej: Corte clásico"
               value={form.name}
               onChange={onChange}
-              required
             />
+
+            {errores.name && (
+              <p className="service-error">
+                {errores.name}
+              </p>
+            )}
           </div>
 
           <div className="row g-3">
             <div className="col-md-6">
               <label
                 className="form-label"
-                htmlFor="duration"
+                htmlFor="durationInMinutes" 
               >
-                Duración
+                Tiempo en minutos
               </label>
 
               <input
                 className="form-control"
-                id="duration"
-                name="duration"
+                id="durationInMinutes"
+                name="durationInMinutes"
                 type="number"
-                min="1"
                 placeholder="30"
-                value={form.duration}
+                value={form.durationInMinutes}
                 onChange={onChange}
-                required
               />
 
-              <div className="form-text">
-                Minutos
-              </div>
+              {errores.durationInMinutes && (
+                <p className="service-error">
+                  {errores.durationInMinutes}
+                </p>
+              )}
+
             </div>
 
             <div className="col-md-6">
@@ -95,16 +102,17 @@ const ServiceModal = ({
                 id="price"
                 name="price"
                 type="number"
-                min="0"
                 placeholder="9000"
                 value={form.price}
                 onChange={onChange}
-                required
               />
 
-              <div className="form-text">
-                Pesos argentinos
-              </div>
+              {errores.price && (
+                <p className="service-error">
+                  {errores.price}
+                </p>
+              )}
+
             </div>
           </div>
 
@@ -122,7 +130,7 @@ const ServiceModal = ({
               className="form-check-label"
               htmlFor="isActive"
             >
-              Servicio activo
+              Activo
             </label>
           </div>
 

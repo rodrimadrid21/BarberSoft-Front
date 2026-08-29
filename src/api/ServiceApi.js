@@ -1,4 +1,4 @@
-const API_URL = "https://localhost:7279/api/services";
+const API_URL = "https://localhost:7284/api/services";
 
 export const getServicios = async () => {
   const response = await fetch(API_URL);
@@ -13,33 +13,33 @@ export const getServicios = async () => {
 export const createServicio = async (servicio) => {
   const response = await fetch(API_URL, {
     method: "POST",
-
     headers: {
       "Content-Type": "application/json",
     },
-
     body: JSON.stringify(servicio),
   });
 
   if (!response.ok) {
     throw new Error("Error al crear el servicio");
   }
+
+  return await response.json();
 };
 
 export const updateServicio = async (id, servicio) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: "PUT",
-
     headers: {
       "Content-Type": "application/json",
     },
-
     body: JSON.stringify(servicio),
   });
 
   if (!response.ok) {
-    throw new Error("Error al editar el servicio");
+    throw new Error("Error al actualizar el servicio");
   }
+
+  return await response.json();
 };
 
 export const deleteServicio = async (id) => {

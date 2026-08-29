@@ -32,7 +32,7 @@ const ClientList = ({
 
           <div className="d-flex gap-2 client-actions">
             <button
-              className="btn btn-outline-light btn-sm"
+              className="edit-client-button"
               type="button"
               onClick={() => onEditar(cliente)}
             >
@@ -40,7 +40,7 @@ const ClientList = ({
             </button>
 
             <button
-              className="btn btn-outline-danger btn-sm"
+              className="delete-client-button"
               type="button"
               onClick={() => onEliminar(cliente)}
             >

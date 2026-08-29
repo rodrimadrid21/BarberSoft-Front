@@ -1,6 +1,7 @@
 const ClientModal = ({
   modoModal,
   form,
+  errores,
   onChange,
   onSubmit,
   onCerrar,
@@ -11,15 +12,11 @@ const ClientModal = ({
         <div className="d-flex justify-content-between align-items-start mb-4">
           <div>
             <p className="client-modal-label">
-              {modoModal === "crear"
-                ? "Nuevo cliente"
-                : "Editar cliente"}
+              {modoModal === "crear" ? "Nuevo cliente" : "Editar cliente"}
             </p>
 
             <h2>
-              {modoModal === "crear"
-                ? "Registrar cliente"
-                : "Modificar cliente"}
+              {modoModal === "crear" ? "Registrar cliente" : "Modificar cliente"}
             </h2>
           </div>
 
@@ -52,8 +49,13 @@ const ClientModal = ({
               placeholder="Ej: Juan Pérez"
               value={form.name}
               onChange={onChange}
-              required
             />
+
+            {errores.name && (
+              <p className="client-error">
+                {errores.name}
+              </p>
+            )}
           </div>
 
           <div>
@@ -69,11 +71,16 @@ const ClientModal = ({
               id="phone"
               name="phone"
               type="tel"
-              placeholder="Ej: 11 5555-1234"
+              placeholder="Ej: 1155551234"
               value={form.phone}
               onChange={onChange}
-              required
             />
+
+            {errores.phone && (
+              <p className="client-error">
+                {errores.phone}
+              </p>
+            )}
           </div>
 
           <div className="d-flex justify-content-end gap-2 mt-2">

@@ -99,7 +99,7 @@ const Sidebar = () => {
           type="button"
           onClick={handleLogout}
         >
-          <i className="bi bi-box-arrow-right"></i>
+          <i className="bi bi-box-arrow-right"></i> 
           <span>Cerrar sesión</span>
         </button>
       </div>

@@ -149,11 +149,11 @@ const Login = () => {
             </div>
 
             {error && (
-  <div className="login-error">
-    <span className="login-error-icon">!</span>
-    <span>{error}</span>
-  </div>
-)}
+              <div className="login-error">
+                <span className="login-error-icon">!</span>
+                <span>{error}</span>
+              </div>
+            )}
 
             <div className="form-check">
               <input

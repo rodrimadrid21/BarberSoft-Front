@@ -1,31 +1,49 @@
 import { useEffect, useState } from "react";
 import "./Service.css";
+
+import ServiceSearch from "./ServiceSearch";
 import ServiceList from "./ServiceList";
 import ServiceModal from "./ServiceModal";
-import DeleteModal from "./DeleteModal";
-import {getServicios, createServicio, updateServicio, deleteServicio} from "../../api/ServiceApi";
+import DeleteModal from "./DeleteServiceModal";
+
+import {getServicios,createServicio,updateServicio,deleteServicio,} from "../../api/ServiceApi";
 
 const Service = () => {
   const [servicios, setServicios] = useState([]);
 
   const [modalAbierto, setModalAbierto] = useState(false);
-
   const [modoModal, setModoModal] = useState("crear");
+
+  const [serviceSearch, setServiceSearch] = useState("");
 
   const [servicioSeleccionado, setServicioSeleccionado] =
     useState(null);
 
   const [form, setForm] = useState({
     name: "",
-    duration: "",
+    durationInMinutes: "",
     price: "",
     isActive: true,
   });
 
-  // -------------------------
-  // CARGAR SERVICIOS
-  // -------------------------
+  const [errores, setErrores] = useState({
+    name: "",
+    durationInMinutes: "",
+    price: "",
+  });
 
+// BUSCAR SERVICIOS
+const handleSearchService = (search) => {
+  setServiceSearch(search);
+};
+
+const serviciosFiltrados = servicios.filter((servicio) =>
+  servicio.name
+    .toLowerCase()
+    .includes(serviceSearch.toLowerCase())
+);
+
+  // CARGAR SERVICIOS
   const cargarServicios = async () => {
     try {
       const data = await getServicios();
@@ -40,29 +58,27 @@ const Service = () => {
     cargarServicios();
   }, []);
 
-  // -------------------------
   // ABRIR MODAL CREAR
-  // -------------------------
-
   const abrirModalCrear = () => {
     setModoModal("crear");
 
     setForm({
       name: "",
-      duration: "",
+      durationInMinutes: "",
       price: "",
       isActive: true,
     });
+    setErrores({
+      name: "",
+      durationInMinutes: "",
+      price: "",
+    });
 
     setServicioSeleccionado(null);
-
     setModalAbierto(true);
   };
 
-  // -------------------------
   // ABRIR MODAL EDITAR
-  // -------------------------
-
   const abrirModalEditar = (servicio) => {
     setModoModal("editar");
 
@@ -70,18 +86,19 @@ const Service = () => {
 
     setForm({
       name: servicio.name,
-      duration: servicio.duration,
+      durationInMinutes: servicio.durationInMinutes,
       price: servicio.price,
       isActive: servicio.isActive,
     });
-
+    setErrores({
+      name: "",
+      durationInMinutes: "",
+      price: "",
+    });
     setModalAbierto(true);
   };
 
-  // -------------------------
   // ABRIR MODAL ELIMINAR
-  // -------------------------
-
   const abrirModalEliminar = (servicio) => {
     setModoModal("eliminar");
 
@@ -90,20 +107,19 @@ const Service = () => {
     setModalAbierto(true);
   };
 
-  // -------------------------
   // CERRAR MODAL
-  // -------------------------
-
   const cerrarModal = () => {
     setModalAbierto(false);
-
     setServicioSeleccionado(null);
+
+    setErrores({
+      name: "",
+      durationInMinutes: "",
+      price: "",
+    });
   };
 
-  // -------------------------
   // CONTROLAR INPUTS
-  // -------------------------
-
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
 
@@ -113,14 +129,46 @@ const Service = () => {
     });
   };
 
-  // -------------------------
-  // CREAR SERVICIO
-  // -------------------------
+  // VALIDAR FORMULARIO
+  const validarFormulario = () => {
+    const nuevosErrores = {
+      name: "",
+      durationInMinutes: "",
+      price: "",
+    };
 
+    if (form.name === "") {
+      nuevosErrores.name = "Ingresá un nombre válido.";
+    }
+    if (
+      form.durationInMinutes === "" ||
+      Number(form.durationInMinutes) <= 0 ||
+      !Number.isInteger(Number(form.durationInMinutes))
+    ) {
+      nuevosErrores.durationInMinutes =
+        "Ingresá una duración válida.";
+    }
+    if (
+      form.price === "" ||
+      Number(form.price) <= 0
+    ) {
+      nuevosErrores.price =
+        "Ingresá un precio válido.";
+    }
+    setErrores(nuevosErrores);
+
+    return (
+      !nuevosErrores.name &&
+      !nuevosErrores.durationInMinutes &&
+      !nuevosErrores.price
+    );
+  };
+
+  // CREAR SERVICIO
   const crearServicio = async () => {
     const nuevoServicio = {
       name: form.name,
-      duration: Number(form.duration),
+      durationInMinutes: Number(form.durationInMinutes),
       price: Number(form.price),
       isActive: form.isActive,
     };
@@ -128,15 +176,11 @@ const Service = () => {
     await createServicio(nuevoServicio);
   };
 
-  // -------------------------
   // EDITAR SERVICIO
-  // -------------------------
-
   const editarServicio = async () => {
     const servicioActualizado = {
-      id: servicioSeleccionado.id,
       name: form.name,
-      duration: Number(form.duration),
+      durationInMinutes: Number(form.durationInMinutes),
       price: Number(form.price),
       isActive: form.isActive,
     };
@@ -147,34 +191,31 @@ const Service = () => {
     );
   };
 
-  // -------------------------
   // CREAR / EDITAR
-  // -------------------------
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const formularioValido = validarFormulario();
+
+    if (!formularioValido) {
+      return;
+    }
     try {
       if (modoModal === "crear") {
         await crearServicio();
       }
-
       if (modoModal === "editar") {
         await editarServicio();
       }
 
       await cargarServicios();
-
       cerrarModal();
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error al guardar servicio:", error);
     }
   };
 
-  // -------------------------
   // ELIMINAR SERVICIO
-  // -------------------------
-
   const eliminarServicio = async () => {
     try {
       await deleteServicio(servicioSeleccionado.id);
@@ -187,19 +228,22 @@ const Service = () => {
     }
   };
 
+  // RESUMEN
+  const serviciosActivos = servicios.filter(
+    (servicio) => servicio.isActive
+  ).length;
+
+  const serviciosInactivos = servicios.filter(
+    (servicio) => !servicio.isActive
+  ).length;
+
   return (
     <main className="services-page">
       <header className="services-header">
         <div>
-          <p className="services-label">
-            Administración
-          </p>
-
+          <p className="services-label">Administración</p>
           <h1>Servicios</h1>
-
-          <p className="services-description">
-            Gestioná los servicios disponibles, su duración y precio.
-          </p>
+          <p className="services-description">Gestioná los servicios disponibles, su duración y precio.</p>
         </div>
 
         <button
@@ -214,54 +258,33 @@ const Service = () => {
       <section className="services-summary">
         <article className="services-summary-card">
           <p>Servicios</p>
-
           <h2>{servicios.length}</h2>
         </article>
-
         <article className="services-summary-card">
           <p>Servicios activos</p>
-
-          <h2>
-            {
-              servicios.filter(
-                (servicio) => servicio.isActive
-              ).length
-            }
-          </h2>
+          <h2>{serviciosActivos}</h2>
         </article>
-
         <article className="services-summary-card">
           <p>Servicios inactivos</p>
-
-          <h2>
-            {
-              servicios.filter(
-                (servicio) => !servicio.isActive
-              ).length
-            }
-          </h2>
+          <h2>{serviciosInactivos}</h2>
         </article>
       </section>
 
       <section className="services-panel">
         <div className="services-panel-header">
           <div>
-            <p className="services-panel-label">
-              Catálogo
-            </p>
-
+            <p className="services-panel-label">Catálogo</p>
             <h2>Servicios disponibles</h2>
           </div>
 
-          <input
-            className="form-control services-search"
-            type="text"
-            placeholder="Buscar servicio..."
+          <ServiceSearch
+            serviceSearch={serviceSearch}
+            onSearchService={handleSearchService}
           />
         </div>
 
         <ServiceList
-          servicios={servicios}
+          servicios={serviciosFiltrados}
           onEditar={abrirModalEditar}
           onEliminar={abrirModalEliminar}
         />
@@ -279,6 +302,7 @@ const Service = () => {
         <ServiceModal
           modoModal={modoModal}
           form={form}
+          errores={errores}
           onChange={handleChange}
           onSubmit={handleSubmit}
           onCerrar={cerrarModal}

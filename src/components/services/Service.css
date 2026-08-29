@@ -57,7 +57,7 @@
 .services-header h1 {
   margin-bottom: 8px;
 
-  font-family: "Playfair Display", serif;
+  font-family: "Playfair Display", initial;
   font-size: clamp(2rem, 4vw, 3.2rem);
 }
 
@@ -283,7 +283,57 @@
   font-size: 0.95rem;
 }
 
+.edit-service-button,
+.client-save-button {
+  border: 0;
+  font-size: 0.85rem;
+  
+  color: #151515;
 
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #d1bc8dc3
+    );
+
+  font-weight: 700;
+}
+
+.edit-service-button {
+  padding: 3px 14px;
+  border-radius: 4px;
+}
+
+.edit-service-button:hover,
+.client-save-button:hover {
+  color: #151515;
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #ce9a2cc3
+    );
+  filter: brightness(1.05);
+}
+
+
+.delete-service-button {
+  border: 1px solid #921919;
+  color: #921919;
+  background-color: rgba(117, 2, 2, 0.12);
+  font-weight: 600;
+}
+
+.delete-service-button {
+  border-radius: 4px;
+}
+
+.delete-service-button:hover {
+  border-color: #e03939;
+  color: #c51919;
+  background-color: rgba(191, 51, 51, 0.292);
+}
 /* =========================
    MODAL
 ========================= */
@@ -330,16 +380,20 @@
   text-transform: uppercase;
 }
 
-.modal-label.danger {
-  color: #e88787;
+.delete-service-label {
+  margin-bottom: 6px;
+  color: #c62626c8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .service-modal h2 {
   margin: 0;
+  font-family: "Playfair Display", initial;
 
   color: var(--color-text);
-
-  font-family: "Playfair Display", serif;
   font-size: 1.6rem;
 }
 
@@ -441,7 +495,16 @@
   color: var(--color-text);
 }
 
+/* =========================
+   VALIDACIONES
+========================= */
 
+.service-error {
+  margin: 6px 0 0;
+  color: #c97a7a;
+  font-size: 0.78rem;
+  font-weight: 400;
+}
 /* =========================
    RESPONSIVE
 ========================= */
@@ -454,6 +517,13 @@
   .service-actions {
     justify-content: flex-end;
   }
+}
+
+  .service-card h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 @media (max-width: 700px) {
@@ -475,6 +545,7 @@
   .services-summary,
   .service-card {
     grid-template-columns: 1fr;
+    
   }
 
   .services-panel {
