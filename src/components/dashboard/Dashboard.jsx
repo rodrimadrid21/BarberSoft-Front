@@ -107,7 +107,7 @@ const Dashboard = () => {
       <section className="dashboard-summary">
         <SummaryCard titulo="Clientes" valor={clientes.length} detalle="Registrados"/>
         <SummaryCard titulo="Servicios" valor={servicios.length} detalle="Disponibles"/>
-        <SummaryCard titulo="Servicios activos" valor={serviciosActivos} detalle="Activos"/>
+        <SummaryCard titulo="Servicios" valor={serviciosActivos} detalle="Activos"/>
         <SummaryCard titulo="Servicios inactivos" valor={serviciosInactivos} detalle="Inactivos"/>
       </section>
 
