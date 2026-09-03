@@ -1,10 +1,10 @@
 const API_URL = "https://localhost:7284/api/client";
 
-export const getClients = async () => {
+export const getClient = async () => {
   const response = await fetch(API_URL);
 
   if (!response.ok) {
-    throw new Error("Error getting clients");
+    throw new Error("Error getting client");
   }
 
   return await response.json();

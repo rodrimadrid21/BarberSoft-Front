@@ -4,7 +4,7 @@ import ClientList from "./ClientList";
 import ClientModal from "./ClientModal";
 import DeleteClientModal from "./DeleteClientModal";
 import ClientSearch from "./ClientSearch";
-import {getClients,createClient,updateClient,deleteClient,} from "../../api/ClientApi";
+import {getClient,createClient,updateClient,deleteClient,} from "../../api/ClientApi";
 
 const Client = () => {
   const [client, setClient] = useState([]);
@@ -32,7 +32,7 @@ const Client = () => {
     updateClient();
   }, []);
 
-  const updateClient = async () => {
+  const handleGetClient = async () => {
     try {
       const data = await getClient();
       setClient(data);
@@ -54,7 +54,7 @@ const Client = () => {
 
 
   // OPEN CREATE MODAL
-  const openCreateModal = () => {
+  const handleCreateModal = () => {
     setModalMode("crear");
 
     setForm({
@@ -71,7 +71,7 @@ const Client = () => {
   };
 
   // OPEN EDIT MODAL
-  const openEditModal = (client) => {
+  const handleOpenEditModal = (client) => {
     setModalMode("editar");
 
     setClientSelected(client);
@@ -89,7 +89,7 @@ const Client = () => {
   };
 
   // CLOSE MODAL
-  const closeModal = () => {
+  const handleCloseModal = () => {
     setModalOpen(false);
     setClientSelected(null);
 
@@ -113,7 +113,7 @@ const Client = () => {
   };
 
   // VALIDATE FORM
-  const validateForm = () => {
+  const handleValidateForm = () => {
     const newErrors = {
       name: "",
       phone: "",
@@ -134,7 +134,7 @@ const Client = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const validForm = validateForm();
+    const validForm = handleValidateForm();
 
     if (!validForm) {
       return;
@@ -160,24 +160,24 @@ const Client = () => {
         setClient(clientsUpdated);
       }
 
-      closeModal();
+      handleCloseModal();
     } catch (error) {
       console.error(error);
     }
   };
 
   // OPEN DELETE MODAL
-  const openDeleteModal = (client) => {
+  const handleOpenDeleteModal = (client) => {
     setClientToDelete(client);
   };
 
   // CLOSE DELETE MODAL
-  const closeDeleteModal = () => {
+  const handleCloseDeleteModal = () => {
     setClientToDelete(null);
   };
 
   // CONFIRM DELETE CLIENT
-  const confirmDeleteClient = async () => {
+  const handleConfirmDeleteClient = async () => {
     try {
       await deleteClient(clientToDelete.id);
 
@@ -187,7 +187,7 @@ const Client = () => {
       );
 
       setClient(clientsUpdated);
-      closeDeleteModal();
+      handleCloseDeleteModal();
     } catch (error) {
       console.error(error);
     }
@@ -206,7 +206,7 @@ const Client = () => {
         <button
           className="btn new-client-button"
           type="button"
-          onClick={openCreateModal}
+          onClick={handleCreateModal}
         >
           + Nuevo cliente
         </button>
@@ -234,8 +234,8 @@ const Client = () => {
 
         <ClientList
           clients={filteredClients}
-          onEdit={openEditModal}
-          onDelete={openDeleteModal}
+          onEdit={handleOpenEditModal}
+          onDelete={handleOpenDeleteModal}
         />
       </section>
 
@@ -246,15 +246,15 @@ const Client = () => {
           errors={errors}
           onChange={handleChange}
           onSubmit={handleSubmit}
-          onClose={closeModal}
+          onClose={handleCloseModal}
         />
       )}
 
       {clientToDelete && (
         <DeleteClientModal
           client={clientToDelete}
-          onConfirm={confirmDeleteClient}
-          onCancel={closeDeleteModal}
+          onConfirm={handleConfirmDeleteClient}
+          onCancel={handleCloseDeleteModal}
         />
       )}
     </main>

@@ -173,7 +173,7 @@ const filteredServices = services.filter((service) =>
       isActive: form.isActive,
     };
 
-    await createServicio(newService);
+    await createService(newService);
   };
 
   // EDITAR SERVICIO
@@ -185,7 +185,7 @@ const filteredServices = services.filter((service) =>
       isActive: form.isActive,
     };
 
-    await updateServicio(
+    await updateService(
       selectedService.id,
       updatedService
     );
@@ -284,7 +284,7 @@ const filteredServices = services.filter((service) =>
         </div>
 
         <ServiceList
-          services={serviciosFiltrados}
+          services={filteredServices}
           onEdit={handleEditModal}
           onDelete={handleDeleteModal}
         />
