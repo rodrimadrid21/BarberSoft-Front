@@ -1,31 +1,31 @@
 const ClientList = ({
-  clientes,
-  onEditar,
-  onEliminar,
+  clients,
+  onEdit,
+  onDelete,
 }) => {
   return (
     <div className="d-flex flex-column gap-3">
-      {clientes.map((cliente) => (
+      {clients.map((client) => (
         <article
           className="client-card d-flex align-items-center justify-content-between gap-3"
-          key={cliente.id}
+          key={client.id}
         >
           <div className="d-flex align-items-center gap-3">
             <div className="client-avatar">
-              {cliente.name
+              {client.name
                 .split(" ")
-                .map((palabra) => palabra.charAt(0))
+                .map((word) => word.charAt(0))
                 .slice(0, 2)
                 .join("")}
             </div>
 
             <div>
               <h3 className="mb-1">
-                {cliente.name}
+                {client.name}
               </h3>
 
               <p className="client-phone mb-0">
-                {cliente.phone}
+                {client.phone}
               </p>
             </div>
           </div>
@@ -34,7 +34,7 @@ const ClientList = ({
             <button
               className="edit-client-button"
               type="button"
-              onClick={() => onEditar(cliente)}
+              onClick={() => onEdit(client)}
             >
               Editar
             </button>
@@ -42,7 +42,7 @@ const ClientList = ({
             <button
               className="delete-client-button"
               type="button"
-              onClick={() => onEliminar(cliente)}
+              onClick={() => onDelete(client)}
             >
               Eliminar
             </button>

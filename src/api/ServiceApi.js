@@ -1,53 +1,53 @@
 const API_URL = "https://localhost:7284/api/services";
 
-export const getServicios = async () => {
+export const getServices = async () => {
   const response = await fetch(API_URL);
 
   if (!response.ok) {
-    throw new Error("Error al obtener los servicios");
+    throw new Error("Error getting services");
   }
 
   return await response.json();
 };
 
-export const createServicio = async (servicio) => {
+export const createService = async (service) => {
   const response = await fetch(API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(servicio),
+    body: JSON.stringify(service),
   });
 
   if (!response.ok) {
-    throw new Error("Error al crear el servicio");
+    throw new Error("Error creating service");
   }
 
   return await response.json();
 };
 
-export const updateServicio = async (id, servicio) => {
+export const updateService = async (id, service) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(servicio),
+    body: JSON.stringify(service),
   });
 
   if (!response.ok) {
-    throw new Error("Error al actualizar el servicio");
+    throw new Error("Error updating service");
   }
 
   return await response.json();
 };
 
-export const deleteServicio = async (id) => {
+export const deleteService = async (id) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: "DELETE",
   });
 
   if (!response.ok) {
-    throw new Error("Error al eliminar el servicio");
+    throw new Error("Error deleting service");
   }
 };

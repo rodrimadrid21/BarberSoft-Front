@@ -63,7 +63,7 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink
-          to="/cobros"
+          to="/billing"
           className={({ isActive }) =>
             isActive ? "sidebar-link active" : "sidebar-link"
           }
@@ -73,7 +73,7 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink
-          to="/reportes"
+          to="/report"
           className={({ isActive }) =>
             isActive ? "sidebar-link active" : "sidebar-link"
           }
@@ -85,7 +85,7 @@ const Sidebar = () => {
 
       <div className="sidebar-footer">
         <NavLink
-          to="/configuracion"
+          to="/configuration"
           className={({ isActive }) =>
             isActive ? "sidebar-link active" : "sidebar-link"
           }

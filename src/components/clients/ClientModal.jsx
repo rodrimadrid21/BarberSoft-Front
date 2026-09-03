@@ -1,10 +1,10 @@
 const ClientModal = ({
-  modoModal,
+  modalMode,
   form,
-  errores,
+  errors,
   onChange,
   onSubmit,
-  onCerrar,
+  onClose,
 }) => {
   return (
     <div className="client-modal-overlay">
@@ -12,18 +12,18 @@ const ClientModal = ({
         <div className="d-flex justify-content-between align-items-start mb-4">
           <div>
             <p className="client-modal-label">
-              {modoModal === "crear" ? "Nuevo cliente" : "Editar cliente"}
+              {modalMode === "crear" ? "Nuevo cliente" : "Editar cliente"}
             </p>
 
             <h2>
-              {modoModal === "crear" ? "Registrar cliente" : "Modificar cliente"}
+              {modalMode === "crear" ? "Registrar cliente" : "Modificar cliente"}
             </h2>
           </div>
 
           <button
             className="client-modal-close"
             type="button"
-            onClick={onCerrar}
+            onClick={onClose}
           >
             ×
           </button>
@@ -51,9 +51,9 @@ const ClientModal = ({
               onChange={onChange}
             />
 
-            {errores.name && (
+            {errors.name && (
               <p className="client-error">
-                {errores.name}
+                {errors.name}
               </p>
             )}
           </div>
@@ -76,9 +76,9 @@ const ClientModal = ({
               onChange={onChange}
             />
 
-            {errores.phone && (
+            {errors.phone && (
               <p className="client-error">
-                {errores.phone}
+                {errors.phone}
               </p>
             )}
           </div>
@@ -87,7 +87,7 @@ const ClientModal = ({
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={onCerrar}
+              onClick={onClose}
             >
               Cancelar
             </button>
@@ -96,7 +96,7 @@ const ClientModal = ({
               className="btn client-save-button"
               type="submit"
             >
-              {modoModal === "crear"
+              {modalMode === "crear"
                 ? "Crear cliente"
                 : "Guardar cambios"}
             </button>

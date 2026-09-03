@@ -1,13 +1,13 @@
 const SummaryCard = ({
-  titulo,
-  valor,
-  detalle,
+  title,
+  value,
+  detail,
 }) => {
   return (
     <article className="summary-card">
-      <h2>{valor}</h2>
-      <p>{titulo}</p>
-      <span>{detalle}</span>
+      <h2>{value}</h2>
+      <p>{title}</p>
+      <span>{detail}</span>
     </article>
   );
 };

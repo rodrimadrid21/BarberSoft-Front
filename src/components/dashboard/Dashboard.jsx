@@ -6,76 +6,76 @@ import dashboardImage from "../../assets/ImgBarberSoft1.png";
 import SummaryCard from "./SummaryCard";
 import AppointmentCard from "./AppointmentCard";
 
-import { getClientes } from "../../api/ClientApi";
-import { getServicios } from "../../api/ServiceApi";
+import { getClients } from "../../api/ClientApi";
+import { getServices } from "../../api/ServiceApi";
 
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const [clientes, setClientes] = useState([]);
-  const [servicios, setServicios] = useState([]);
+  const [clients, setClients] = useState([]);
+  const [services, setServices] = useState([]);
 
   // CARGAR DATOS
-  const cargarDatos = async () => {
+  const loadDashboardData = async () => {
     try {
-      const clientesData = await getClientes();
-      const serviciosData = await getServicios();
+      const clientsData = await getClients();
+      const servicesData = await getServices();
 
-      setClientes(clientesData);
-      setServicios(serviciosData);
+      setClients(clientsData);
+      setServices(servicesData);
     } catch (error) {
       console.error("Error al cargar el dashboard:", error);
     }
   };
 
   useEffect(() => {
-    cargarDatos();
+    loadDashboardData();
   }, []);
 
   // DATOS CALCULADOS
-  const serviciosActivos = servicios.filter((servicio) => servicio.isActive).length;
-  const serviciosInactivos = servicios.filter((servicio) => !servicio.isActive).length;
+  const servicesActive = services.filter((service) => service.isActive).length;
+  const servicesInactive = services.filter((service) => !service.isActive).length;
 
   // DATOS TEMPORALES (Appointment)
-  const proximosTurnos = [
+  const nextAppointments = [
     {
       id: 1,
-      hora: "16:30",
-      cliente: "Juan Pérez",
-      servicio: "Corte clásico",
-      estado: "Confirmado",
+      hour: "16:30",
+      client: "Juan Pérez",
+      service: "Corte clásico",
+      state: "Confirmado",
     },
     {
       id: 2,
-      hora: "17:15",
-      cliente: "Martín López",
-      servicio: "Corte y barba",
-      estado: "Pendiente",
+      hour: "17:15",
+      client: "Martín López",
+      service: "Corte y barba",
+      state: "Pendiente",
     },
     {
       id: 3,
-      hora: "18:00",
-      cliente: "Lucas Gómez",
-      servicio: "Barba",
-      estado: "Confirmado",
+      hour: "18:00",
+      client: "Lucas Gómez",
+      service: "Barba",
+      state: "Confirmado",
     },
     {
       id: 4,
-      hora: "19:00",
-      cliente: "Tomás Díaz",
-      servicio: "Degradado",
-      estado: "Pendiente",
+      hour: "19:00",
+      client: "Tomás Díaz",
+      service: "Degradado",
+      state: "Pendiente",
     },
   ];
 
   // DATOS TEMPORALES (Transaction)
-  const facturacionSemanal = [
-    { dia: "LUN", valor: 42 },
-    { dia: "MAR", valor: 68 },
-    { dia: "MIÉR", valor: 48 },
-    { dia: "JUE", valor: 56 },
-    { dia: "VIE", valor: 61 },
-    { dia: "SÁB", valor: 82 },
+  const weeklyBilling = [
+    { day: "LUN", value: 42 },
+    { day: "MAR", value: 68 },
+    { day: "MIÉR", value: 48 },
+    { day: "JUE", value: 56 },
+    { day: "VIE", value: 61 },
+    { day: "SÁB", value: 82 },
   ];
 
   return (
@@ -90,9 +90,9 @@ const Dashboard = () => {
             <span> BarberSoft</span>
           </h1>
           <p className="dashboard-hero-description">
-            Actualmente tenés {clientes.length} clientes registrados
+            Actualmente tenés {clients.length} clientes registrados
             <br />
-            y {serviciosActivos} servicios activos.
+            y {servicesActive} servicios activos.
           </p>
           <button className="btn dashboard-agenda-button" type="button" onClick={() => navigate("/agenda")}>
             Ver agenda completa
@@ -105,10 +105,10 @@ const Dashboard = () => {
       </section>
 
       <section className="dashboard-summary">
-        <SummaryCard titulo="Clientes" valor={clientes.length} detalle="Registrados"/>
-        <SummaryCard titulo="Servicios" valor={servicios.length} detalle="Disponibles"/>
-        <SummaryCard titulo="Servicios" valor={serviciosActivos} detalle="Activos"/>
-        <SummaryCard titulo="Servicios" valor={serviciosInactivos} detalle="Inactivos"/>
+        <SummaryCard title="Clientes" value={clients.length} detail="Registrados"/>
+        <SummaryCard title="Servicios" value={services.length} detail="Disponibles"/>
+        <SummaryCard title="Servicios" value={servicesActive} detail="Activos"/>
+        <SummaryCard title="Servicios" value={servicesInactive} detail="Inactivos"/>
       </section>
 
       <section className="dashboard-content">
@@ -122,13 +122,13 @@ const Dashboard = () => {
           </div>
 
           <div>
-            {proximosTurnos.map((turno) => (
+            {nextAppointments.map((appointment) => (
               <AppointmentCard
-                key={turno.id}
-                hora={turno.hora}
-                cliente={turno.cliente}
-                servicio={turno.servicio}
-                estado={turno.estado}
+                key={appointment.id}
+                hour={appointment.hour}
+                client={appointment.client}
+                service={appointment.service}
+                state={appointment.state}
               />
             ))}
           </div>
@@ -185,23 +185,23 @@ const Dashboard = () => {
               </div>
 
             <div className="billing-bars">
-              {facturacionSemanal.map((dia) => (
+              {weeklyBilling.map((day) => (
                 <div
                   className="billing-column"
-                  key={dia.dia}
+                  key={day.day}
                 >
                   <div className="billing-bar-container">
                     <div
                       className={
-                        dia.dia === "SÁB" ? "billing-bar active" : "billing-bar"
+                        day.day === "SÁB" ? "billing-bar active" : "billing-bar"
                       }
                       style={{
-                        height: `${dia.valor}%`,
+                        height: `${day.value}%`,
                       }}
                     />
                   </div>
 
-                  <span>{dia.dia}</span>
+                  <span>{day.day}</span>
                 </div>
               ))}
             </div></div>

@@ -18,9 +18,9 @@ function App() {
       <Route path="/services" element={<Services/>}/>
       <Route path="/clients" element={<Client/>}/>
       <Route path="/agenda" element={<ComingSoon />} />
-      <Route path="/cobros" element={<ComingSoon />} />
-      <Route path="/reportes" element={<ComingSoon />} />
-      <Route path="/configuracion" element={<ComingSoon />} />
+      <Route path="/billing" element={<ComingSoon />} />
+      <Route path="/reports" element={<ComingSoon />} />
+      <Route path="/configuration" element={<ComingSoon />} />
     </Route>
     </Routes>
   );

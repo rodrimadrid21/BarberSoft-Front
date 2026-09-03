@@ -6,17 +6,17 @@ import ServiceList from "./ServiceList";
 import ServiceModal from "./ServiceModal";
 import DeleteModal from "./DeleteServiceModal";
 
-import {getServicios,createServicio,updateServicio,deleteServicio,} from "../../api/ServiceApi";
+import {getServices,createService,updateService,deleteService,} from "../../api/ServiceApi";
 
 const Service = () => {
-  const [servicios, setServicios] = useState([]);
+  const [services, setServices] = useState([]);
 
-  const [modalAbierto, setModalAbierto] = useState(false);
-  const [modoModal, setModoModal] = useState("crear");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState("crear");
 
   const [serviceSearch, setServiceSearch] = useState("");
 
-  const [servicioSeleccionado, setServicioSeleccionado] =
+  const [selectedService, setSelectedService] =
     useState(null);
 
   const [form, setForm] = useState({
@@ -26,7 +26,7 @@ const Service = () => {
     isActive: true,
   });
 
-  const [errores, setErrores] = useState({
+  const [errors, setErrors] = useState({
     name: "",
     durationInMinutes: "",
     price: "",
@@ -37,30 +37,30 @@ const handleSearchService = (search) => {
   setServiceSearch(search);
 };
 
-const serviciosFiltrados = servicios.filter((servicio) =>
-  servicio.name
+const filteredServices = services.filter((service) =>
+  service.name
     .toLowerCase()
     .includes(serviceSearch.toLowerCase())
 );
 
   // CARGAR SERVICIOS
-  const cargarServicios = async () => {
+  const uploadServices = async () => {
     try {
-      const data = await getServicios();
+      const data = await getServices();
 
-      setServicios(data);
+      setServices(data);
     } catch (error) {
       console.error("Error al cargar servicios:", error);
     }
   };
 
   useEffect(() => {
-    cargarServicios();
+    uploadServices();
   }, []);
 
   // ABRIR MODAL CREAR
-  const abrirModalCrear = () => {
-    setModoModal("crear");
+  const handleCreateModal = () => {
+    setModalMode("crear");
 
     setForm({
       name: "",
@@ -68,51 +68,51 @@ const serviciosFiltrados = servicios.filter((servicio) =>
       price: "",
       isActive: true,
     });
-    setErrores({
+    setErrors({
       name: "",
       durationInMinutes: "",
       price: "",
     });
 
-    setServicioSeleccionado(null);
-    setModalAbierto(true);
+    setSelectedService(null);
+    setModalOpen(true);
   };
 
   // ABRIR MODAL EDITAR
-  const abrirModalEditar = (servicio) => {
-    setModoModal("editar");
+  const handleEditModal = (service) => {
+    setModalMode("editar");
 
-    setServicioSeleccionado(servicio);
+    setSelectedService(service);
 
     setForm({
-      name: servicio.name,
-      durationInMinutes: servicio.durationInMinutes,
-      price: servicio.price,
-      isActive: servicio.isActive,
+      name: service.name,
+      durationInMinutes: service.durationInMinutes,
+      price: service.price,
+      isActive: service.isActive,
     });
-    setErrores({
+    setErrors({
       name: "",
       durationInMinutes: "",
       price: "",
     });
-    setModalAbierto(true);
+    setModalOpen(true);
   };
 
   // ABRIR MODAL ELIMINAR
-  const abrirModalEliminar = (servicio) => {
-    setModoModal("eliminar");
+  const handleDeleteModal = (service) => {
+    setModalMode("eliminar");
 
-    setServicioSeleccionado(servicio);
+    setSelectedService(service);
 
-    setModalAbierto(true);
+    setModalOpen(true);
   };
 
   // CERRAR MODAL
-  const cerrarModal = () => {
-    setModalAbierto(false);
-    setServicioSeleccionado(null);
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setSelectedService(null);
 
-    setErrores({
+    setErrors({
       name: "",
       durationInMinutes: "",
       price: "",
@@ -130,55 +130,55 @@ const serviciosFiltrados = servicios.filter((servicio) =>
   };
 
   // VALIDAR FORMULARIO
-  const validarFormulario = () => {
-    const nuevosErrores = {
+  const handleFormValidation = () => {
+    const newErrors = {
       name: "",
       durationInMinutes: "",
       price: "",
     };
 
     if (form.name === "") {
-      nuevosErrores.name = "Ingresá un nombre válido.";
+      newErrors.name = "Ingresá un nombre válido.";
     }
     if (
       form.durationInMinutes === "" ||
       Number(form.durationInMinutes) <= 0 ||
       !Number.isInteger(Number(form.durationInMinutes))
     ) {
-      nuevosErrores.durationInMinutes =
+      newErrors.durationInMinutes =
         "Ingresá una duración válida.";
     }
     if (
       form.price === "" ||
       Number(form.price) <= 0
     ) {
-      nuevosErrores.price =
+      newErrors.price =
         "Ingresá un precio válido.";
     }
-    setErrores(nuevosErrores);
+    setErrors(newErrors);
 
     return (
-      !nuevosErrores.name &&
-      !nuevosErrores.durationInMinutes &&
-      !nuevosErrores.price
+      !newErrors.name &&
+      !newErrors.durationInMinutes &&
+      !newErrors.price
     );
   };
 
   // CREAR SERVICIO
-  const crearServicio = async () => {
-    const nuevoServicio = {
+  const handleCreateService = async () => {
+    const newService = {
       name: form.name,
       durationInMinutes: Number(form.durationInMinutes),
       price: Number(form.price),
       isActive: form.isActive,
     };
 
-    await createServicio(nuevoServicio);
+    await createServicio(newService);
   };
 
   // EDITAR SERVICIO
-  const editarServicio = async () => {
-    const servicioActualizado = {
+  const handleEditService = async () => {
+    const updatedService = {
       name: form.name,
       durationInMinutes: Number(form.durationInMinutes),
       price: Number(form.price),
@@ -186,8 +186,8 @@ const serviciosFiltrados = servicios.filter((servicio) =>
     };
 
     await updateServicio(
-      servicioSeleccionado.id,
-      servicioActualizado
+      selectedService.id,
+      updatedService
     );
   };
 
@@ -195,46 +195,46 @@ const serviciosFiltrados = servicios.filter((servicio) =>
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formularioValido = validarFormulario();
+    const validForm = handleFormValidation();
 
-    if (!formularioValido) {
+    if (!validForm) {
       return;
     }
     try {
-      if (modoModal === "crear") {
-        await crearServicio();
+      if (modalMode === "crear") {
+        await handleCreateService();
       }
-      if (modoModal === "editar") {
-        await editarServicio();
+      if (modalMode === "editar") {
+        await handleEditService();
       }
 
-      await cargarServicios();
-      cerrarModal();
+      await uploadServices();
+      handleCloseModal();
     } catch (error) {
       console.error("Error al guardar servicio:", error);
     }
   };
 
   // ELIMINAR SERVICIO
-  const eliminarServicio = async () => {
+  const handleDeleteService = async () => {
     try {
-      await deleteServicio(servicioSeleccionado.id);
+      await deleteService(selectedService.id);
 
-      await cargarServicios();
+      await uploadServices();
 
-      cerrarModal();
+      handleCloseModal();
     } catch (error) {
       console.error("Error al eliminar servicio:", error);
     }
   };
 
   // RESUMEN
-  const serviciosActivos = servicios.filter(
-    (servicio) => servicio.isActive
+  const activeServices = services.filter(
+    (service) => service.isActive
   ).length;
 
-  const serviciosInactivos = servicios.filter(
-    (servicio) => !servicio.isActive
+  const inactiveServices = services.filter(
+    (service) => !service.isActive
   ).length;
 
   return (
@@ -249,7 +249,7 @@ const serviciosFiltrados = servicios.filter((servicio) =>
         <button
           className="btn new-service-button"
           type="button"
-          onClick={abrirModalCrear}
+          onClick={handleCreateModal}
         >
           + Nuevo servicio
         </button>
@@ -258,15 +258,15 @@ const serviciosFiltrados = servicios.filter((servicio) =>
       <section className="services-summary">
         <article className="services-summary-card">
           <p>Servicios</p>
-          <h2>{servicios.length}</h2>
+          <h2>{services.length}</h2>
         </article>
         <article className="services-summary-card">
           <p>Servicios activos</p>
-          <h2>{serviciosActivos}</h2>
+          <h2>{activeServices}</h2>
         </article>
         <article className="services-summary-card">
           <p>Servicios inactivos</p>
-          <h2>{serviciosInactivos}</h2>
+          <h2>{inactiveServices}</h2>
         </article>
       </section>
 
@@ -284,28 +284,28 @@ const serviciosFiltrados = servicios.filter((servicio) =>
         </div>
 
         <ServiceList
-          servicios={serviciosFiltrados}
-          onEditar={abrirModalEditar}
-          onEliminar={abrirModalEliminar}
+          services={serviciosFiltrados}
+          onEdit={handleEditModal}
+          onDelete={handleDeleteModal}
         />
       </section>
 
-      {modalAbierto && modoModal === "eliminar" && (
+      {modalOpen && modalMode === "eliminar" && (
         <DeleteModal
-          servicio={servicioSeleccionado}
-          onEliminar={eliminarServicio}
-          onCerrar={cerrarModal}
+          service={selectedService}
+          onDelete={handleDeleteService}
+          onClose={handleCloseModal}
         />
       )}
 
-      {modalAbierto && modoModal !== "eliminar" && (
+      {modalOpen && modalMode !== "eliminar" && (
         <ServiceModal
-          modoModal={modoModal}
+          modalMode={modalMode}
           form={form}
-          errores={errores}
+          errors={errors}
           onChange={handleChange}
           onSubmit={handleSubmit}
-          onCerrar={cerrarModal}
+          onClose={handleCloseModal}
         />
       )}
     </main>

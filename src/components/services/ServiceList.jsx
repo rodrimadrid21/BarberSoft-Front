@@ -1,40 +1,40 @@
-const ServiceList = ({ servicios, onEditar, onEliminar }) => {
+const ServiceList = ({ services, onEdit, onDelete }) => {
   return (
     <div className="d-flex flex-column gap-3">
-      {servicios.map((servicio) => (
+      {services.map((service) => (
         <article
           className="service-card d-grid align-items-center gap-3 p-3"
-          key={servicio.id}
+          key={service.id}
         >
           <div className="d-flex align-items-center gap-3">
             <div className="service-icon">
-              {servicio.name.charAt(0)}
+              {service.name.charAt(0)}
             </div>
 
             <div>
-              <h3 className="mb-1">{servicio.name}</h3>
+              <h3 className="mb-1">{service.name}</h3>
 
               <span
                 className={
-                  servicio.isActive
+                  service.isActive
                     ? "service-status active"
                     : "service-status inactive"
                 }
               >
-                {servicio.isActive ? "Activo" : "Inactivo"}
+                {service.isActive ? "Activo" : "Inactivo"}
               </span>
             </div>
           </div>
 
           <div className="d-flex flex-column gap-1 service-detail">
             <span>Tiempo</span>
-            <strong>{servicio.durationInMinutes} min</strong>
+            <strong>{service.durationInMinutes} min</strong>
           </div>
 
           <div className="d-flex flex-column gap-1 service-detail">
             <span>Precio</span>
             <strong>
-              ${servicio.price.toLocaleString("es-AR")}
+              ${service.price.toLocaleString("es-AR")}
             </strong>
           </div>
 
@@ -42,7 +42,7 @@ const ServiceList = ({ servicios, onEditar, onEliminar }) => {
             <button
               className="edit-service-button"
               type="button"
-              onClick={() => onEditar(servicio)}
+              onClick={() => onEdit(service)}
             >
               Editar
             </button>
@@ -50,7 +50,7 @@ const ServiceList = ({ servicios, onEditar, onEliminar }) => {
             <button
               className="delete-service-button"
               type="button"
-              onClick={() => onEliminar(servicio)}
+              onClick={() => onDelete(service)}
             >
               Eliminar
             </button>
