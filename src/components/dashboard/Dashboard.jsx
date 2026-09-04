@@ -6,7 +6,7 @@ import dashboardImage from "../../assets/ImgBarberSoft1.png";
 import SummaryCard from "./SummaryCard";
 import AppointmentCard from "./AppointmentCard";
 
-import { getClients } from "../../api/ClientApi";
+import { getClient } from "../../api/ClientApi";
 import { getServices } from "../../api/ServiceApi";
 
 const Dashboard = () => {
@@ -18,7 +18,7 @@ const Dashboard = () => {
   // CARGAR DATOS
   const loadDashboardData = async () => {
     try {
-      const clientsData = await getClients();
+      const clientsData = await getClient();
       const servicesData = await getServices();
 
       setClients(clientsData);
