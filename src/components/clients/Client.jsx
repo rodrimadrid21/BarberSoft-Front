@@ -29,7 +29,7 @@ const Client = () => {
 
   // UPDATE CLIENTS
   useEffect(() => {
-    updateClient();
+    handleGetClient();
   }, []);
 
   const handleGetClient = async () => {
