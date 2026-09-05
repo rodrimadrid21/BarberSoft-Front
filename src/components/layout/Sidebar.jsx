@@ -53,6 +53,16 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink
+          to="/users"
+          className={({ isActive }) =>
+            isActive ? "sidebar-link active" : "sidebar-link"
+          }
+        >
+          <i className="bi bi-people"></i>
+          <span>Usuarios</span>
+        </NavLink>
+
+        <NavLink
           to="/services"
           className={({ isActive }) =>
             isActive ? "sidebar-link active" : "sidebar-link"
@@ -73,7 +83,7 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink
-          to="/report"
+          to="/reports"
           className={({ isActive }) =>
             isActive ? "sidebar-link active" : "sidebar-link"
           }
@@ -99,7 +109,7 @@ const Sidebar = () => {
           type="button"
           onClick={handleLogout}
         >
-          <i className="bi bi-box-arrow-right"></i> 
+          <i className="bi bi-box-arrow-right"></i>
           <span>Cerrar sesión</span>
         </button>
       </div>
