@@ -1,19 +1,19 @@
-const DeleteClientModal = ({
-  client,
+const DeleteUserModal = ({
+  user,
   onConfirm,
   onCancel,
 }) => {
   return (
-    <div className="client-modal-overlay">
-      <div className="delete-client-modal">
-        <div className="delete-client-header">
+    <div className="user-modal-overlay">
+      <div className="delete-user-modal">
+        <div className="delete-user-header">
           <div>
-            <p className="delete-client-label">Delete Client</p>
+            <p className="delete-user-label">Delete User</p>
             <h2>Confirm Delete</h2>
           </div>
 
           <button
-            className="client-modal-close"
+            className="user-modal-close"
             type="button"
             onClick={onCancel}
           >
@@ -21,8 +21,9 @@ const DeleteClientModal = ({
           </button>
         </div>
 
-        <p className="delete-client-text">
-          Estas seguro de que quieres eliminar <strong>{client.name}</strong>?
+        <p className="delete-user-text">
+          ¿Estás seguro de que quieres eliminar{" "}
+          <strong>{user.name}</strong>?
         </p>
 
         <div className="d-flex justify-content-end gap-2 mt-4">
@@ -35,7 +36,7 @@ const DeleteClientModal = ({
           </button>
 
           <button
-            className="btn delete-client-button"
+            className="btn delete-user-button"
             type="button"
             onClick={onConfirm}
           >
@@ -47,4 +48,4 @@ const DeleteClientModal = ({
   );
 };
 
-export default DeleteClientModal;
+export default DeleteUserModal;

@@ -1,10 +1,10 @@
 const ServiceModal = ({
-  modoModal,
+  modalMode,
   form,
-  errores,
+  errors,
   onChange,
   onSubmit,
-  onCerrar,
+  onClose,
 }) => {
   return (
     <div className="modal-overlay">
@@ -12,13 +12,13 @@ const ServiceModal = ({
         <div className="d-flex justify-content-between align-items-start gap-3 mb-4">
           <div>
             <p className="modal-label">
-              {modoModal === "crear"
+              {modalMode === "crear"
                 ? "Nuevo servicio"
                 : "Editar servicio"}
             </p>
 
             <h2>
-              {modoModal === "crear"
+              {modalMode === "crear"
                 ? "Crear servicio"
                 : "Modificar servicio"}
             </h2>
@@ -27,7 +27,7 @@ const ServiceModal = ({
           <button
             className="modal-close"
             type="button"
-            onClick={onCerrar}
+            onClick={onClose}
           >
             ×
           </button>
@@ -55,9 +55,9 @@ const ServiceModal = ({
               onChange={onChange}
             />
 
-            {errores.name && (
+            {errors.name && (
               <p className="service-error">
-                {errores.name}
+                {errors.name}
               </p>
             )}
           </div>
@@ -81,9 +81,9 @@ const ServiceModal = ({
                 onChange={onChange}
               />
 
-              {errores.durationInMinutes && (
+              {errors.durationInMinutes && (
                 <p className="service-error">
-                  {errores.durationInMinutes}
+                  {errors.durationInMinutes}
                 </p>
               )}
 
@@ -107,9 +107,9 @@ const ServiceModal = ({
                 onChange={onChange}
               />
 
-              {errores.price && (
+              {errors.price && (
                 <p className="service-error">
-                  {errores.price}
+                  {errors.price}
                 </p>
               )}
 
@@ -138,7 +138,7 @@ const ServiceModal = ({
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={onCerrar}
+              onClick={onClose}
             >
               Cancelar
             </button>
@@ -147,7 +147,7 @@ const ServiceModal = ({
               className="btn modal-save-button"
               type="submit"
             >
-              {modoModal === "crear"
+              {modalMode === "crear"
                 ? "Crear servicio"
                 : "Guardar cambios"}
             </button>

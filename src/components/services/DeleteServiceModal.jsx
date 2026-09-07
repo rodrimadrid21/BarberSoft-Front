@@ -1,7 +1,7 @@
 const DeleteModal = ({
-  servicio,
-  onEliminar,
-  onCerrar,
+  service,
+  onDelete,
+  onClose,
 }) => {
   return (
     <div className="modal-overlay">
@@ -16,7 +16,7 @@ const DeleteModal = ({
           <button
             className="modal-close"
             type="button"
-            onClick={onCerrar}
+            onClick={onClose}
           >
             ×
           </button>
@@ -25,7 +25,7 @@ const DeleteModal = ({
         <div className="delete-modal-content">
           <p>
             Estás por eliminar el servicio{" "}
-            <strong>{servicio?.name}</strong>.
+            <strong>{service?.name}</strong>.
           </p>
 
         </div>
@@ -34,7 +34,7 @@ const DeleteModal = ({
           <button
             className="btn btn-outline-secondary"
             type="button"
-            onClick={onCerrar}
+            onClick={onClose}
           >
             Cancelar
           </button>
@@ -42,7 +42,7 @@ const DeleteModal = ({
           <button
             className="delete-service-button"
             type="button"
-            onClick={onEliminar}
+            onClick={onDelete}
           >
             Eliminar servicio
           </button>

@@ -4,6 +4,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import MainLayout from "./components/layout/MainLayout";
 import Services from "./components/services/Service"
 import Client from "./components/clients/Client"
+import User from "./components/users/User";
 import ComingSoon from "./components/comingSoon/ComingSoon";
 
 function App() {
@@ -17,10 +18,11 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/services" element={<Services/>}/>
       <Route path="/clients" element={<Client/>}/>
+      <Route path="/users" element={<User />}/>
       <Route path="/agenda" element={<ComingSoon />} />
-      <Route path="/cobros" element={<ComingSoon />} />
-      <Route path="/reportes" element={<ComingSoon />} />
-      <Route path="/configuracion" element={<ComingSoon />} />
+      <Route path="/billing" element={<ComingSoon />} />
+      <Route path="/reports" element={<ComingSoon />} />
+      <Route path="/configuration" element={<ComingSoon />} />
     </Route>
     </Routes>
   );

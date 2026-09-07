@@ -1,28 +1,28 @@
 const AppointmentCard = ({
-  hora,
-  cliente,
-  servicio,
-  estado,
+  hour,
+  client,
+  service,
+  state,
 }) => {
   return (
     <div className="appointment-item">
       <div className="appointment-time">
-        {hora}
+        {hour}
       </div>
 
       <div className="appointment-info">
-        <h3>{cliente}</h3>
-        <p>{servicio}</p>
+        <h3>{client}</h3>
+        <p>{service}</p>
       </div>
 
       <span
         className={
-          estado === "Confirmado"
+          state === "Confirmado"
             ? "appointment-status confirmed"
             : "appointment-status pending"
         }
       >
-        {estado}
+        {state}
       </span>
     </div>
   );

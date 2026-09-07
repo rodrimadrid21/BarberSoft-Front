@@ -1,4 +1,4 @@
-const ClientModal = ({
+const UserModal = ({
   modalMode,
   form,
   errors,
@@ -7,21 +7,23 @@ const ClientModal = ({
   onClose,
 }) => {
   return (
-    <div className="client-modal-overlay">
-      <div className="client-modal">
+    <div className="user-modal-overlay">
+      <div className="user-modal">
         <div className="d-flex justify-content-between align-items-start mb-4">
           <div>
-            <p className="client-modal-label">
-              {modalMode === "crear" ? "Nuevo cliente" : "Editar cliente"}
+            <p className="user-modal-label">
+              {modalMode === "crear" ? "Nuevo usuario" : "Editar usuario"}
             </p>
 
             <h2>
-              {modalMode === "crear" ? "Registrar cliente" : "Modificar cliente"}
+              {modalMode === "crear"
+                ? "Registrar usuario"
+                : "Modificar usuario"}
             </h2>
           </div>
 
           <button
-            className="client-modal-close"
+            className="user-modal-close"
             type="button"
             onClick={onClose}
           >
@@ -52,7 +54,7 @@ const ClientModal = ({
             />
 
             {errors.name && (
-              <p className="client-error">
+              <p className="user-error">
                 {errors.name}
               </p>
             )}
@@ -61,27 +63,60 @@ const ClientModal = ({
           <div>
             <label
               className="form-label"
-              htmlFor="phone"
+              htmlFor="email"
             >
-              Teléfono
+              Email
             </label>
 
             <input
               className="form-control"
-              id="phone"
-              name="phone"
-              type="tel"
-              placeholder="Ej: 1155551234"
-              value={form.phone}
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Ej: juan@email.com"
+              value={form.email}
               onChange={onChange}
             />
 
-            {errors.phone && (
-              <p className="client-error">
-                {errors.phone}
+            {errors.email && (
+              <p className="user-error">
+                {errors.email}
               </p>
             )}
           </div>
+
+          {modalMode === "crear" && (
+            <div>
+              <label
+                className="form-label"
+                htmlFor="password"
+              >
+                Contraseña
+              </label>
+
+              <input
+                className="form-control"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Ingresá una contraseña"
+                value={form.password}
+                onChange={onChange}
+              />
+
+              {errors.password && (
+                <p className="user-error">
+                  {errors.password}
+                </p>
+              )}
+            </div>
+          )}
+
+          {errors.general && (
+            <p className="user-error">
+              {errors.general}
+            </p>
+          )}
 
           <div className="d-flex justify-content-end gap-2 mt-2">
             <button
@@ -93,12 +128,12 @@ const ClientModal = ({
             </button>
 
             <button
-              className="btn client-save-button"
+              className="btn user-save-button"
               type="submit"
             >
               {modalMode === "crear"
-                ? "Crear cliente"
-                : "Guardar cambios"}
+                ? "Crear usuario"
+                : "Guardar"}
             </button>
           </div>
         </form>
@@ -107,4 +142,4 @@ const ClientModal = ({
   );
 };
 
-export default ClientModal;
+export default UserModal;
