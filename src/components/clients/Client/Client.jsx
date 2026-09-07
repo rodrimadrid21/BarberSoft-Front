@@ -1,16 +1,17 @@
 import "./Client.css";
-import ClientList from "./ClientList";
-import ClientModal from "./ClientModal";
-import SearchInput from "../common/SearchInput";
-import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
-import Button from "../common/Button";
-import useCrudResource from "../../hooks/useCrudResource";
+import SearchInput from "../../shared/SearchInput/SearchInput";
+import ConfirmDeleteModal from "../../shared/ConfirmDeleteModal/ConfirmDeleteModal";
+import Button from "../../shared/Button/Button";
+import ResourceList from "../../shared/ResourceList/ResourceList";
+import ResourceModal from "../../shared/ResourceModal/ResourceModal";
+import useCrudResource from "../../../shared/hooks/useCrudResource";
+import { getInitials } from "../../../shared/utils/entityUtils";
 import {
   getClient,
   createClient,
   updateClient,
   deleteClient,
-} from "../../api/ClientApi";
+} from "../../../shared/api/ClientApi";
 
 const initialForm = {
   name: "",
@@ -41,6 +42,20 @@ const transformClientChange = ({ name, value }) => {
 
   return value;
 };
+
+const clientFields = [
+  {
+    name: "name",
+    label: "Nombre",
+    placeholder: "Ej: Juan Pérez",
+  },
+  {
+    name: "phone",
+    label: "Teléfono",
+    type: "tel",
+    placeholder: "Ej: 1155551234",
+  },
+];
 
 const Client = () => {
   const {
@@ -106,18 +121,26 @@ const Client = () => {
           />
         </div>
 
-        <ClientList
-          clients={filteredClients}
+        <ResourceList
+          items={filteredClients}
+          getAvatar={(client) => getInitials(client.name)}
+          renderSubtitle={(client) => (
+            <p className="resource-list__subtitle client-phone mb-0">
+              {client.phone}
+            </p>
+          )}
           onEdit={handleOpenEditModal}
           onDelete={handleOpenDeleteModal}
         />
       </section>
 
       {modalOpen && (
-        <ClientModal
+        <ResourceModal
+          resourceName="cliente"
           modalMode={modalMode}
           form={form}
           errors={errors}
+          fields={clientFields}
           onChange={handleChange}
           onSubmit={handleSubmit}
           onClose={handleCloseModal}

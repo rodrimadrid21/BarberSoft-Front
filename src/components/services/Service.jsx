@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import "./Service.css";
 
-import ServiceSearch from "./ServiceSearch";
 import ServiceList from "./ServiceList";
 import ServiceModal from "./ServiceModal";
-import DeleteModal from "./DeleteServiceModal";
+import SearchInput from "../common/SearchInput";
+import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
+import Button from "../common/Button";
 
 import {getServices,createService,updateService,deleteService,} from "../../api/ServiceApi";
 
@@ -55,7 +56,7 @@ const filteredServices = services.filter((service) =>
   };
 
   useEffect(() => {
-    uploadServices();
+    Promise.resolve().then(uploadServices);
   }, []);
 
   // ABRIR MODAL CREAR
@@ -246,13 +247,9 @@ const filteredServices = services.filter((service) =>
           <p className="services-description">Gestioná los servicios disponibles, su duración y precio.</p>
         </div>
 
-        <button
-          className="btn new-service-button"
-          type="button"
-          onClick={handleCreateModal}
-        >
+        <Button className="new-service-button" onClick={handleCreateModal}>
           + Nuevo servicio
-        </button>
+        </Button>
       </header>
 
       <section className="services-summary">
@@ -277,9 +274,11 @@ const filteredServices = services.filter((service) =>
             <h2>Servicios disponibles</h2>
           </div>
 
-          <ServiceSearch
-            serviceSearch={serviceSearch}
-            onSearchService={handleSearchService}
+          <SearchInput
+            value={serviceSearch}
+            onChange={handleSearchService}
+            placeholder="Buscar servicio..."
+            className="services-search"
           />
         </div>
 
@@ -291,10 +290,13 @@ const filteredServices = services.filter((service) =>
       </section>
 
       {modalOpen && modalMode === "eliminar" && (
-        <DeleteModal
-          service={selectedService}
-          onDelete={handleDeleteService}
-          onClose={handleCloseModal}
+        <ConfirmDeleteModal
+          item={selectedService}
+          onConfirm={handleDeleteService}
+          onCancel={handleCloseModal}
+          label="Eliminar servicio"
+          title="¿Estás seguro?"
+          message={<>Estás por eliminar el servicio <strong>{selectedService?.name}</strong>.</>}
         />
       )}
 

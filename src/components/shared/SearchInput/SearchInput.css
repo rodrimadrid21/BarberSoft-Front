@@ -1,0 +1,16 @@
+.search-input {
+  border-color: var(--color-border);
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+}
+
+.search-input::placeholder {
+  color: #72727b;
+}
+
+.search-input:focus {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.1);
+}

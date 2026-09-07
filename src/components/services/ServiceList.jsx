@@ -1,3 +1,5 @@
+import Button from "../common/Button";
+
 const ServiceList = ({ services, onEdit, onDelete }) => {
   return (
     <div className="d-flex flex-column gap-3">
@@ -39,21 +41,16 @@ const ServiceList = ({ services, onEdit, onDelete }) => {
           </div>
 
           <div className="d-flex gap-2 service-actions">
-            <button
+            <Button
               className="edit-service-button"
-              type="button"
               onClick={() => onEdit(service)}
             >
               Editar
-            </button>
+            </Button>
 
-            <button
-              className="delete-service-button"
-              type="button"
-              onClick={() => onDelete(service)}
-            >
+            <Button variant="danger" onClick={() => onDelete(service)}>
               Eliminar
-            </button>
+            </Button>
           </div>
         </article>
       ))}

@@ -1,3 +1,5 @@
+import Button from "../common/Button";
+
 const ClientModal = ({
   modalMode,
   form,
@@ -20,13 +22,13 @@ const ClientModal = ({
             </h2>
           </div>
 
-          <button
-            className="client-modal-close"
-            type="button"
+          <Button
+            variant="close"
             onClick={onClose}
+            ariaLabel="Cerrar formulario de cliente"
           >
             ×
-          </button>
+          </Button>
         </div>
 
         <form
@@ -84,22 +86,15 @@ const ClientModal = ({
           </div>
 
           <div className="d-flex justify-content-end gap-2 mt-2">
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={onClose}
-            >
+            <Button variant="secondary" onClick={onClose}>
               Cancelar
-            </button>
+            </Button>
 
-            <button
-              className="btn client-save-button"
-              type="submit"
-            >
+            <Button className="client-save-button" type="submit">
               {modalMode === "crear"
                 ? "Crear cliente"
                 : "Guardar cambios"}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

@@ -1,3 +1,5 @@
+import Button from "../common/Button";
+
 const UserList = ({
   users,
   onEdit,
@@ -37,21 +39,19 @@ const UserList = ({
           </div>
 
           <div className="d-flex gap-2 user-actions">
-            <button
+            <Button
               className="edit-user-button"
-              type="button"
               onClick={() => onEdit(user)}
             >
               Editar
-            </button>
+            </Button>
 
-            <button
-              className="delete-user-button"
-              type="button"
+            <Button
+              variant="danger"
               onClick={() => onDelete(user)}
             >
               Eliminar
-            </button>
+            </Button>
           </div>
         </article>
       ))}

@@ -6,8 +6,8 @@ import dashboardImage from "../../assets/ImgBarberSoft1.png";
 import SummaryCard from "./SummaryCard";
 import AppointmentCard from "./AppointmentCard";
 
-import { getClient } from "../../api/ClientApi";
-import { getServices } from "../../api/ServiceApi";
+import { getClient } from "../../shared/api/ClientApi";
+import { getServices } from "../../shared/api/ServiceApi";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    loadDashboardData();
+    Promise.resolve().then(loadDashboardData);
   }, []);
 
   // DATOS CALCULADOS

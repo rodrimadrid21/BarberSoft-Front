@@ -1,3 +1,5 @@
+import Button from "../common/Button";
+
 const ServiceModal = ({
   modalMode,
   form,
@@ -24,13 +26,13 @@ const ServiceModal = ({
             </h2>
           </div>
 
-          <button
-            className="modal-close"
-            type="button"
+          <Button
+            variant="close"
             onClick={onClose}
+            ariaLabel="Cerrar formulario de servicio"
           >
             ×
-          </button>
+          </Button>
         </div>
 
         <form
@@ -135,22 +137,15 @@ const ServiceModal = ({
           </div>
 
           <div className="d-flex justify-content-end gap-2 mt-2">
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={onClose}
-            >
+            <Button variant="secondary" onClick={onClose}>
               Cancelar
-            </button>
+            </Button>
 
-            <button
-              className="btn modal-save-button"
-              type="submit"
-            >
+            <Button className="modal-save-button" type="submit">
               {modalMode === "crear"
                 ? "Crear servicio"
                 : "Guardar cambios"}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

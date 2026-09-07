@@ -1,0 +1,58 @@
+.ui-button {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font: inherit;
+  font-weight: 700;
+  transition: var(--transition);
+}
+
+.ui-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ui-button--primary {
+  color: #151515;
+  background: linear-gradient(135deg, var(--color-primary), #efcf8c);
+}
+
+.ui-button--primary:hover:not(:disabled) {
+  color: #151515;
+  filter: brightness(1.05);
+}
+
+.ui-button--secondary {
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+  background-color: transparent;
+}
+
+.ui-button--secondary:hover:not(:disabled) {
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+}
+
+.ui-button--danger {
+  border-color: #921919;
+  color: #921919;
+  background-color: rgba(117, 2, 2, 0.12);
+}
+
+.ui-button--danger:hover:not(:disabled) {
+  border-color: #e03939;
+  color: #c51919;
+  background-color: rgba(191, 51, 51, 0.292);
+}
+
+.ui-button--close {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-color: var(--color-border);
+  border-radius: 9px;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface-light);
+  font-size: 1.3rem;
+  font-weight: 400;
+}

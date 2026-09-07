@@ -2,9 +2,9 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import MainLayout from "./components/layout/MainLayout";
-import Services from "./components/services/Service"
-import Client from "./components/clients/Client"
-import User from "./components/users/User";
+import Services from "./components/services/Service/Service"
+import Client from "./components/clients/Client/Client"
+import User from "./components/users/User/User";
 import ComingSoon from "./components/comingSoon/ComingSoon";
 
 function App() {

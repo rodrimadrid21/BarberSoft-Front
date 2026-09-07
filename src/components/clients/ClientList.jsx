@@ -1,3 +1,5 @@
+import Button from "../common/Button";
+
 const ClientList = ({
   clients,
   onEdit,
@@ -31,21 +33,19 @@ const ClientList = ({
           </div>
 
           <div className="d-flex gap-2 client-actions">
-            <button
+            <Button
               className="edit-client-button"
-              type="button"
               onClick={() => onEdit(client)}
             >
               Editar
-            </button>
+            </Button>
 
-            <button
-              className="delete-client-button"
-              type="button"
+            <Button
+              variant="danger"
               onClick={() => onDelete(client)}
             >
               Eliminar
-            </button>
+            </Button>
           </div>
         </article>
       ))}

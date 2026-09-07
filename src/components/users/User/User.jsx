@@ -1,16 +1,17 @@
 import "./User.css";
-import UserList from "./UserList";
-import UserModal from "./UserModal";
-import SearchInput from "../common/SearchInput";
-import ConfirmDeleteModal from "../common/ConfirmDeleteModal";
-import Button from "../common/Button";
-import useCrudResource from "../../hooks/useCrudResource";
+import SearchInput from "../../shared/SearchInput/SearchInput";
+import ConfirmDeleteModal from "../../shared/ConfirmDeleteModal/ConfirmDeleteModal";
+import Button from "../../shared/Button/Button";
+import ResourceList from "../../shared/ResourceList/ResourceList";
+import ResourceModal from "../../shared/ResourceModal/ResourceModal";
+import useCrudResource from "../../../shared/hooks/useCrudResource";
+import { getInitials } from "../../../shared/utils/entityUtils";
 import {
   getUsers,
   createUser,
   updateUser,
   deleteUser,
-} from "../../api/UserApi";
+} from "../../../shared/api/UserApi";
 
 const initialForm = {
   name: "",
@@ -56,6 +57,27 @@ const editUserForm = (user) => ({
   email: user.email,
   password: "",
 });
+
+const userFields = [
+  {
+    name: "name",
+    label: "Nombre",
+    placeholder: "Ej: Juan Pérez",
+  },
+  {
+    name: "email",
+    label: "Email",
+    type: "email",
+    placeholder: "Ej: juan@email.com",
+  },
+  {
+    name: "password",
+    label: "Contraseña",
+    type: "password",
+    placeholder: "Ingresá una contraseña",
+    visible: ({ modalMode }) => modalMode === "crear",
+  },
+];
 
 const User = () => {
   const {
@@ -126,18 +148,33 @@ const User = () => {
           />
         </div>
 
-        <UserList
-          users={filteredUsers}
+        <ResourceList
+          items={filteredUsers}
+          getAvatar={(user) => getInitials(user.name)}
+          renderSubtitle={(user) => (
+            <>
+              <p className="resource-list__subtitle user-email mb-0">
+                {user.email}
+              </p>
+              {user.role && (
+                <p className="resource-list__subtitle user-role mb-0">
+                  {user.role}
+                </p>
+              )}
+            </>
+          )}
           onEdit={handleOpenEditModal}
           onDelete={handleOpenDeleteModal}
         />
       </section>
 
       {modalOpen && (
-        <UserModal
+        <ResourceModal
+          resourceName="usuario"
           modalMode={modalMode}
           form={form}
           errors={errors}
+          fields={userFields}
           onChange={handleChange}
           onSubmit={handleSubmit}
           onClose={handleCloseModal}
