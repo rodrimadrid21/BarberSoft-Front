@@ -30,11 +30,13 @@ export const createUser = async (user) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error creating user");
-  }
+      const errorData = await response.json();
 
-  return await response.json();
-};
+      throw new Error(errorData.message);
+    }
+
+    return await response.json();
+  };
 
 export const updateUser = async (id, user) => {
   const response = await fetch(`${API_URL}/${id}`, {
@@ -46,7 +48,9 @@ export const updateUser = async (id, user) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error updating user");
+  const errorData = await response.json();
+
+  throw new Error(errorData.message);
   }
 
   return await response.json();

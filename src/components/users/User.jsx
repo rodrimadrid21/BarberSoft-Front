@@ -4,12 +4,7 @@ import UserList from "./UserList";
 import UserModal from "./UserModal";
 import DeleteUserModal from "./DeleteUserModal";
 import UserSearch from "./UserSearch";
-import {
-  getUsers,
-  createUser,
-  updateUser,
-  deleteUser,
-} from "../../api/UserApi";
+import { getUsers, createUser, updateUser, deleteUser, } from "../../api/UserApi";
 
 const User = () => {
   const [users, setUsers] = useState([]);
@@ -32,6 +27,7 @@ const User = () => {
     name: "",
     email: "",
     password: "",
+    general: "",
   });
 
   // GET USERS
@@ -74,6 +70,7 @@ const User = () => {
       name: "",
       email: "",
       password: "",
+      general: "",
     });
 
     setUserSelected(null);
@@ -96,6 +93,7 @@ const User = () => {
       name: "",
       email: "",
       password: "",
+      general: "",
     });
 
     setModalOpen(true);
@@ -110,6 +108,7 @@ const User = () => {
       name: "",
       email: "",
       password: "",
+      general: "",
     });
   };
 
@@ -125,32 +124,38 @@ const User = () => {
 
   // VALIDATE FORM
   const handleValidateForm = () => {
-    const newErrors = {
-      name: "",
-      email: "",
-      password: "",
-    };
-
-    if (form.name === "") {
-      newErrors.name = "Ingresá un nombre válido.";
-    }
-
-    if (form.email === "") {
-      newErrors.email = "Ingresá un email válido.";
-    }
-
-    if (modalMode === "crear" && form.password === "") {
-      newErrors.password = "Ingresá una contraseña.";
-    }
-
-    setErrors(newErrors);
-
-    return (
-      !newErrors.name &&
-      !newErrors.email &&
-      !newErrors.password
-    );
+  const newErrors = {
+    name: "",
+    email: "",
+    password: "",
+    general: "",
   };
+
+  if (form.name === "") {
+    newErrors.name = "Ingresá un nombre válido.";
+  }
+
+  if (form.email === "") {
+    newErrors.email = "Ingresá un email válido.";
+  }
+
+  if (modalMode === "crear") {
+    if (form.password === "") {
+      newErrors.password = "Ingresá una contraseña.";
+    } else if (form.password.length < 4) {
+      newErrors.password =
+        "La contraseña debe tener al menos 4 caracteres.";
+    }
+  }
+
+  setErrors(newErrors);
+
+  return (
+    !newErrors.name &&
+    !newErrors.email &&
+    !newErrors.password
+  );
+};
 
   // CREATE OR UPDATE USER
   const handleSubmit = async (event) => {
@@ -192,8 +197,30 @@ const User = () => {
       }
 
       handleCloseModal();
+      
     } catch (error) {
-      console.error(error);
+      if (error.message === "Username already exists.") {
+        setErrors({
+          ...errors,
+          name: "Ya existe un usuario con ese nombre.",
+        });
+      
+        return;
+      }
+    
+      if (error.message === "Email already exists.") {
+        setErrors({
+          ...errors,
+          email: "Ya existe un usuario con ese email.",
+        });
+      
+        return;
+      }
+    
+      setErrors({
+        ...errors,
+        general: "Ocurrió un error al guardar el usuario.",
+      });
     }
   };
 
@@ -275,7 +302,7 @@ const User = () => {
 
       {modalOpen && (
         <UserModal
-          modoModal={modalMode}
+          modalMode={modalMode}
           form={form}
           errors={errors}
           onChange={handleChange}

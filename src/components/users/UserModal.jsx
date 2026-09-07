@@ -112,6 +112,12 @@ const UserModal = ({
             </div>
           )}
 
+          {errors.general && (
+            <p className="user-error">
+              {errors.general}
+            </p>
+          )}
+
           <div className="d-flex justify-content-end gap-2 mt-2">
             <button
               className="btn btn-outline-secondary"
@@ -127,7 +133,7 @@ const UserModal = ({
             >
               {modalMode === "crear"
                 ? "Crear usuario"
-                : "Guardar cambios"}
+                : "Guardar"}
             </button>
           </div>
         </form>
