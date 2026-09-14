@@ -36,7 +36,7 @@ const Dashboard = () => {
   const servicesActive = services.filter((service) => service.isActive).length;
   const servicesInactive = services.filter((service) => !service.isActive).length;
 
-  // DATOS TEMPORALES (Appointment)
+  // DATOS TEMPORALES (Cita)
   const nextAppointments = [
     {
       id: 1,
@@ -192,9 +192,7 @@ const Dashboard = () => {
                 >
                   <div className="billing-bar-container">
                     <div
-                      className={
-                        day.day === "SÁB" ? "billing-bar active" : "billing-bar"
-                      }
+                      className="billing-bar"
                       style={{
                         height: `${day.value}%`,
                       }}
