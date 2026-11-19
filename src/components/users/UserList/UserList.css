@@ -1,0 +1,101 @@
+.user-card {
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 15px;
+  background-color: #1c1c20;
+  transition: var(--transition);
+}
+
+.user-card:hover {
+  transform: translateY(-2px);
+  border-color: #44444b;
+  background-color: #202025;
+}
+
+.user-avatar {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 12px;
+  color: #151515;
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #efd08f
+    );
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+}
+
+.user-card h3 {
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.user-email,
+.user-role {
+  color: var(--color-text-muted);
+  font-size: 0.86rem;
+}
+
+.user-role {
+  margin-top: 3px;
+}
+
+.edit-user-button {
+  padding: 3px 14px;
+  border: 0;
+  border-radius: 4px;
+  color: #151515;
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #d1bc8dc3
+    );
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.edit-user-button:hover {
+  color: #151515;
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #ce9a2cc3
+    );
+  filter: brightness(1.05);
+}
+
+.delete-user-button {
+  border: 1px solid #921919;
+  border-radius: 4px;
+  color: #921919;
+  background-color: rgba(117, 2, 2, 0.12);
+  font-weight: 600;
+}
+
+.delete-user-button:hover {
+  border-color: #e03939;
+  color: #c51919;
+  background-color: rgba(191, 51, 51, 0.292);
+}
+
+@media (max-width: 700px) {
+  .user-card {
+    align-items: flex-start !important;
+    flex-direction: column;
+  }
+
+  .user-actions {
+    width: 100%;
+  }
+
+  .user-actions button {
+    flex: 1;
+  }
+}

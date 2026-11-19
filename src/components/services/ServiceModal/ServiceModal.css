@@ -1,0 +1,127 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.service-modal {
+  width: 100%;
+  max-width: 520px;
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background-color: var(--color-surface);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.modal-label {
+  margin-bottom: 6px;
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.service-modal h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: "Playfair Display", initial;
+  font-size: 1.6rem;
+}
+
+.modal-close {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface-light);
+  font-size: 1.3rem;
+}
+
+.modal-close:hover {
+  color: var(--color-text);
+  background-color: #2b2b31;
+}
+
+.service-modal .form-label {
+  color: var(--color-text);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.service-modal .form-control {
+  border-color: var(--color-border);
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+}
+
+.service-modal .form-control::placeholder,
+.service-modal .form-text {
+  color: #777780;
+}
+
+.service-modal .form-control:focus {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.1);
+}
+
+.service-modal .form-check-label {
+  color: var(--color-text-muted);
+}
+
+.service-modal .form-check-input {
+  border-color: #55555d;
+  background-color: var(--color-surface-light);
+}
+
+.service-modal .form-check-input:checked {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+}
+
+.service-modal .form-check-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.1);
+}
+
+.modal-save-button {
+  border: 0;
+  color: #151515;
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #efcf8c
+    );
+  font-weight: 700;
+}
+
+.modal-save-button:hover {
+  color: #151515;
+  filter: brightness(1.05);
+}
+
+.service-error {
+  margin: 6px 0 0;
+  color: #c97a7a;
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+
+@media (max-width: 600px) {
+  .service-modal {
+    padding: 22px;
+  }
+}

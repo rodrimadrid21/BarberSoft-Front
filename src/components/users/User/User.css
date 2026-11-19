@@ -1,0 +1,157 @@
+.users-page {
+  min-height: 100vh;
+  padding: 42px;
+  color: var(--color-text);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(212, 168, 83, 0.08),
+      transparent 28%
+    ),
+    var(--color-background);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.users-header {
+  max-width: 1400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin: 0 auto 34px;
+}
+
+.users-label,
+.users-panel-label {
+  color: var(--color-primary);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.users-label {
+  margin-bottom: 8px;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+}
+
+.users-panel-label {
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.users-header h1 {
+  margin-bottom: 8px;
+  font-family: "Playfair Display", initial;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.users-description {
+  color: var(--color-text-muted);
+}
+
+.new-user-button {
+  border: 0;
+  color: #151515;
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #efcf8c
+    );
+  font-weight: 700;
+}
+
+.new-user-button {
+  padding: 14px 20px;
+}
+
+.new-user-button:hover {
+  color: #151515;
+  filter: brightness(1.05);
+}
+
+/* =========================
+   RESUMEN
+========================= */
+
+.users-summary {
+  max-width: 1400px;
+  margin: 0 auto 24px;
+}
+
+.users-summary-card {
+  width: 100%;
+  max-width: 340px;
+  padding: 22px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background-color: var(--color-surface);
+}
+
+.users-summary-card p {
+  margin-bottom: 12px;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}
+
+.users-summary-card h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+/* =========================
+   PANEL
+========================= */
+
+.users-panel {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background-color: var(--color-surface);
+}
+
+.users-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.users-panel-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+  .users-page {
+    padding: 26px 16px 100px;
+  }
+
+  .users-header,
+  .users-panel-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .new-user-button,
+  .users-summary-card {
+    width: 100%;
+    max-width: none;
+  }
+
+  .users-panel {
+    padding: 20px;
+  }
+
+}

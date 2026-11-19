@@ -1,0 +1,44 @@
+.appointment-item {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: clamp(8px, 1.2vh, 11px) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.appointment-item:last-child {
+  border-bottom: 0;
+}
+
+.appointment-time {
+  color: var(--color-primary);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.appointment-info h3 {
+  margin-bottom: 2px;
+  font-size: 0.85rem;
+}
+
+.appointment-info p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+}
+
+.appointment-status.pending {
+  color: #e8bd69;
+  background-color: rgba(212, 168, 83, 0.12);
+}
+
+@media (max-width: 700px) {
+  .appointment-item {
+    grid-template-columns: 55px 1fr;
+  }
+
+  .appointment-status {
+    grid-column: 2;
+  }
+}

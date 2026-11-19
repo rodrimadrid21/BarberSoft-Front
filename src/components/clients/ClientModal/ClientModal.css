@@ -1,0 +1,79 @@
+.client-modal {
+  width: 100%;
+  max-width: 520px;
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background-color: var(--color-surface);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.client-modal-label {
+  margin-bottom: 6px;
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.client-modal h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: "Playfair Display", initial;
+  font-size: 1.6rem;
+}
+
+.client-modal .form-label {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.client-modal .form-control {
+  border-color: var(--color-border);
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+}
+
+.client-modal .form-control:focus {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+  background-color: var(--color-surface-light);
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.1);
+}
+
+.client-modal .form-control.is-invalid {
+  border-color: #9b5d5d;
+  box-shadow: none;
+}
+
+.client-error {
+  margin: 6px 0 0;
+  color: #c97a7a;
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+
+.client-save-button {
+  border: 0;
+  color: #151515;
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #d1bc8dc3
+    );
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.client-save-button:hover {
+  color: #151515;
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-primary),
+      #ce9a2cc3
+    );
+  filter: brightness(1.05);
+}

@@ -1,0 +1,17 @@
+.delete-service-label {
+  margin-bottom: 6px;
+  color: #c62626c8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.delete-modal-content {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.delete-modal-content strong {
+  color: var(--color-text);
+}
